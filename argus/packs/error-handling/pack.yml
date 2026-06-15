@@ -1,0 +1,5 @@
+name: error-handling
+description: Exception design and raise/catch discipline — base class, boundaries, no swallowing
+category: quality
+requires: []
+platforms: [all]
