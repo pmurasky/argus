@@ -4,7 +4,7 @@ import yaml
 import pytest
 
 PACKS_DIR = Path(str(importlib.resources.files("argus") / "packs"))
-REQUIRED_PACKS = ["atomic-commit", "tdd", "solid", "code-quality", "pre-commit", "type-safety", "error-handling", "documentation-standards"]
+REQUIRED_PACKS = ["atomic-commit", "tdd", "solid", "code-quality", "pre-commit", "type-safety", "error-handling", "documentation-standards", "dependency-injection", "design-patterns"]
 VALID_CATEGORIES = {"workflow", "architecture", "quality", "process"}
 
 
