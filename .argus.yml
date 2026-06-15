@@ -1,0 +1,11 @@
+packs:
+- atomic-commit
+- tdd
+- solid
+- code-quality
+- pre-commit
+platforms:
+- claude
+- opencode
+- copilot
+- cursor
