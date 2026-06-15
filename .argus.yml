@@ -6,6 +6,7 @@ packs:
 - pre-commit
 - type-safety
 - error-handling
+- documentation-standards
 platforms:
 - claude
 - opencode

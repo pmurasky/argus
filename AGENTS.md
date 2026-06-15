@@ -238,3 +238,32 @@ Assign the unstructured value to a typed local variable as soon as its shape is 
 - `except ...: pass` (silent swallow)
 - try/except inside a function that is not a system boundary
 - Exception name does not end in `Error`
+
+
+## DOCUMENTATION-STANDARDS
+
+# Documentation Standards
+
+## Docstring Requirements
+- All public classes must have a one-line docstring describing their purpose
+- All public methods and functions must have a one-line docstring
+- All Click CLI commands must have a one-line docstring (used by `--help`)
+- `__init__` methods are exempt — document the class instead
+- Private methods (prefixed `_`) are exempt
+
+## Docstring Style
+- One sentence, imperative mood: "Load packs from the search path." not "Loads packs..."
+- No restating the function name: `def load():` → not "Load the load."
+- Fits on one line — if you need more, the function probably does too much
+
+## Comment Discipline
+- Write comments only when the WHY is non-obvious: a hidden constraint, a workaround,
+  a subtle invariant, or behaviour that would surprise a reader
+- Never explain WHAT the code does — well-named identifiers already do that
+- Never reference the current task, ticket, or caller in a comment
+
+## Red Flags — Stop and Correct
+- Public class, method, or CLI command with no docstring
+- Docstring that restates the function name or explains what the code does
+- Comment that says what the code does rather than why
+- Multi-line docstring on a function under 10 lines
