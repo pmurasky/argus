@@ -1,0 +1,8 @@
+## Design Patterns Checklist
+
+- [ ] No `match`/`switch` dispatching on object type or enum variant
+- [ ] No `isinstance` check before calling a method
+- [ ] Adding a new variant does not require editing an existing class body
+- [ ] Pattern participant classes are named after their role (`*Strategy`, `*Factory`, etc.)
+- [ ] Pattern applied because a smell exists — not speculatively
+- [ ] No pattern introduced with only one concrete implementation

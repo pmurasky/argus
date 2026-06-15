@@ -1,0 +1,28 @@
+# Design Patterns
+
+## Core Rule
+Apply structural patterns to eliminate `isinstance` checks, `if/elif` type-dispatch chains, and
+duplicated logic. A pattern is the fix, not the decoration.
+
+## Pattern Quick Reference
+
+| Smell | Pattern | Fix |
+|---|---|---|
+| `if type == "A": ... elif type == "B":` | Strategy | One class per behaviour; caller holds the variant |
+| Object creation buried in application logic | Factory / Factory Method | Centralise creation, return abstract type |
+| Many callers updated when state changes | Observer | Callers subscribe; emitter calls `notify()` |
+| Incompatible interfaces must work together | Adapter | Wrap the foreign interface; expose the local protocol |
+| Step sequence fixed, some steps vary | Template Method | Base class owns the skeleton; subclasses override steps |
+| Repeated `if feature_flag:` throughout code | Decorator | Compose behaviours at the composition root |
+
+## Usage Rules
+- Apply a pattern only when the smell exists — not speculatively
+- Name the participant classes after the pattern role: `*Strategy`, `*Factory`, `*Observer`, `*Adapter`
+- Keep pattern participants in separate modules; avoid god-module pattern files
+- Prefer composition over inheritance for Strategy and Decorator
+
+## Red Flags — Stop and Correct
+- `match`/`switch` dispatching on an object's type or an enum variant
+- `isinstance` check before calling a method (fix the type hierarchy instead)
+- New variant requires editing an existing class body (violates Open/Closed)
+- Pattern introduced with only one concrete implementation (premature — wait for the second)

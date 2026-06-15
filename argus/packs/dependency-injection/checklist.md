@@ -1,0 +1,8 @@
+## Dependency Injection Checklist
+
+- [ ] All dependencies received via constructor parameters, not instantiated internally
+- [ ] Constructor parameter types are abstractions (Protocol / ABC), not concrete classes
+- [ ] No `ConcreteClass()` call inside a class body
+- [ ] No concrete infrastructure imports in domain or application modules
+- [ ] Composition root (entry point) is the only place that wires concrete implementations
+- [ ] Tests inject substitutes via constructor — no patching of internals
