@@ -536,3 +536,231 @@ i += 1                               # explains what, not why
 def __init__(self, project_root: Path) -> None: ...
 def _load_one(self, name: str) -> Pack: ...
 ```
+
+
+## DEPENDENCY-INJECTION
+
+# Dependency Injection
+
+## Core Rule
+Depend on abstractions, not concretions. Inject all dependencies via constructor — never
+instantiate collaborators inside a class body.
+
+## Constructor Injection
+- Accept dependencies as constructor parameters typed to abstract interfaces (Protocol / ABC)
+- Never call `ConcreteClass()` inside a class body; receive it as a parameter instead
+- Store injected dependencies as instance attributes; do not pass them through method chains
+
+## Abstract Boundaries
+- Define a Protocol or ABC for every dependency that has more than one conceivable implementation
+- Application-layer classes depend only on those abstractions, never on concrete imports from
+  infrastructure layers (databases, HTTP clients, file system adapters)
+
+## Composition Root
+- Wire concrete implementations to abstractions in exactly one place: the entry point (CLI, app
+  factory, `main()`)
+- Test code is the only other place that substitutes implementations
+
+## Red Flags — Stop and Correct
+- `ConcreteClass()` instantiated inside a class body
+- `import` of a concrete infrastructure class inside a domain or application module
+- Method that accepts a flag/enum to select which implementation to use (use polymorphism instead)
+- Test that patches internals of the class under test rather than injecting a substitute
+
+
+## Dependency Injection Checklist
+
+- [ ] All dependencies received via constructor parameters, not instantiated internally
+- [ ] Constructor parameter types are abstractions (Protocol / ABC), not concrete classes
+- [ ] No `ConcreteClass()` call inside a class body
+- [ ] No concrete infrastructure imports in domain or application modules
+- [ ] Composition root (entry point) is the only place that wires concrete implementations
+- [ ] Tests inject substitutes via constructor — no patching of internals
+
+
+## Dependency Injection Examples
+
+### Correct
+
+```python
+from typing import Protocol
+
+class PackRepository(Protocol):
+    def find(self, name: str) -> Pack: ...
+
+class PackLoader:
+    """Load packs using an injected repository."""
+
+    def __init__(self, repository: PackRepository) -> None:
+        self._repository = repository
+
+    def load(self, name: str) -> Pack:
+        """Return a pack by name from the repository."""
+        return self._repository.find(name)
+```
+
+```python
+# Composition root — only place that wires concrete types
+def main() -> None:
+    repo = FileSystemPackRepository(root=Path("packs"))
+    loader = PackLoader(repository=repo)
+    cli(loader=loader)
+```
+
+### Incorrect
+
+```python
+class PackLoader:
+    def __init__(self) -> None:
+        self._repository = FileSystemPackRepository()  # concrete, internal
+
+    def load(self, name: str) -> Pack:
+        return self._repository.find(name)
+```
+
+```python
+# Infrastructure import in domain module
+from argus.infrastructure.fs_repo import FileSystemPackRepository  # wrong layer
+```
+
+### Testable with injection
+
+```python
+class FakeRepository:
+    def find(self, name: str) -> Pack:
+        return Pack(name=name, content="# stub")
+
+def test_loader_returns_pack_by_name():
+    # Given
+    loader = PackLoader(repository=FakeRepository())
+    # When
+    result = loader.load("tdd")
+    # Then
+    assert result.name == "tdd"
+```
+
+
+## DESIGN-PATTERNS
+
+# Design Patterns
+
+## Core Rule
+Apply structural patterns to eliminate `isinstance` checks, `if/elif` type-dispatch chains, and
+duplicated logic. A pattern is the fix, not the decoration.
+
+## Pattern Quick Reference
+
+| Smell | Pattern | Fix |
+|---|---|---|
+| `if type == "A": ... elif type == "B":` | Strategy | One class per behaviour; caller holds the variant |
+| Object creation buried in application logic | Factory / Factory Method | Centralise creation, return abstract type |
+| Many callers updated when state changes | Observer | Callers subscribe; emitter calls `notify()` |
+| Incompatible interfaces must work together | Adapter | Wrap the foreign interface; expose the local protocol |
+| Step sequence fixed, some steps vary | Template Method | Base class owns the skeleton; subclasses override steps |
+| Repeated `if feature_flag:` throughout code | Decorator | Compose behaviours at the composition root |
+
+## Usage Rules
+- Apply a pattern only when the smell exists — not speculatively
+- Name the participant classes after the pattern role: `*Strategy`, `*Factory`, `*Observer`, `*Adapter`
+- Keep pattern participants in separate modules; avoid god-module pattern files
+- Prefer composition over inheritance for Strategy and Decorator
+
+## Red Flags — Stop and Correct
+- `match`/`switch` dispatching on an object's type or an enum variant
+- `isinstance` check before calling a method (fix the type hierarchy instead)
+- New variant requires editing an existing class body (violates Open/Closed)
+- Pattern introduced with only one concrete implementation (premature — wait for the second)
+
+
+## Design Patterns Checklist
+
+- [ ] No `match`/`switch` dispatching on object type or enum variant
+- [ ] No `isinstance` check before calling a method
+- [ ] Adding a new variant does not require editing an existing class body
+- [ ] Pattern participant classes are named after their role (`*Strategy`, `*Factory`, etc.)
+- [ ] Pattern applied because a smell exists — not speculatively
+- [ ] No pattern introduced with only one concrete implementation
+
+
+## Design Patterns Examples
+
+### Strategy — eliminate type dispatch
+
+```python
+# Incorrect — type switch
+def format_output(content: str, fmt: str) -> str:
+    if fmt == "markdown":
+        return f"# {content}"
+    elif fmt == "plain":
+        return content
+    elif fmt == "html":
+        return f"<h1>{content}</h1>"
+
+# Correct — Strategy
+class OutputStrategy(Protocol):
+    def format(self, content: str) -> str: ...
+
+class MarkdownStrategy:
+    def format(self, content: str) -> str:
+        return f"# {content}"
+
+class HtmlStrategy:
+    def format(self, content: str) -> str:
+        return f"<h1>{content}</h1>"
+
+class Formatter:
+    """Format output using an injected strategy."""
+
+    def __init__(self, strategy: OutputStrategy) -> None:
+        self._strategy = strategy
+
+    def format(self, content: str) -> str:
+        """Apply the configured strategy to content."""
+        return self._strategy.format(content)
+```
+
+### Factory — centralise creation
+
+```python
+# Incorrect — creation scattered in application code
+if platform == "claude":
+    adapter = ClaudeAdapter(config)
+elif platform == "cursor":
+    adapter = CursorAdapter(config)
+
+# Correct — Factory
+class AdapterFactory:
+    """Create platform adapters by name."""
+
+    _registry: dict[str, type[Adapter]] = {
+        "claude": ClaudeAdapter,
+        "cursor": CursorAdapter,
+    }
+
+    def create(self, platform: str, config: Config) -> Adapter:
+        """Return an adapter for the given platform name."""
+        cls = self._registry[platform]
+        return cls(config)
+```
+
+### Observer — decouple state changes from reactions
+
+```python
+class GenerationCompleted:
+    files: list[GeneratedFile]
+
+class EventBus:
+    """Dispatch events to registered subscribers."""
+
+    def __init__(self) -> None:
+        self._subscribers: list[Callable[[GenerationCompleted], None]] = []
+
+    def subscribe(self, handler: Callable[[GenerationCompleted], None]) -> None:
+        """Register a handler for GenerationCompleted events."""
+        self._subscribers.append(handler)
+
+    def publish(self, event: GenerationCompleted) -> None:
+        """Notify all subscribers of an event."""
+        for handler in self._subscribers:
+            handler(event)
+```

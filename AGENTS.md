@@ -267,3 +267,65 @@ Assign the unstructured value to a typed local variable as soon as its shape is 
 - Docstring that restates the function name or explains what the code does
 - Comment that says what the code does rather than why
 - Multi-line docstring on a function under 10 lines
+
+
+## DEPENDENCY-INJECTION
+
+# Dependency Injection
+
+## Core Rule
+Depend on abstractions, not concretions. Inject all dependencies via constructor — never
+instantiate collaborators inside a class body.
+
+## Constructor Injection
+- Accept dependencies as constructor parameters typed to abstract interfaces (Protocol / ABC)
+- Never call `ConcreteClass()` inside a class body; receive it as a parameter instead
+- Store injected dependencies as instance attributes; do not pass them through method chains
+
+## Abstract Boundaries
+- Define a Protocol or ABC for every dependency that has more than one conceivable implementation
+- Application-layer classes depend only on those abstractions, never on concrete imports from
+  infrastructure layers (databases, HTTP clients, file system adapters)
+
+## Composition Root
+- Wire concrete implementations to abstractions in exactly one place: the entry point (CLI, app
+  factory, `main()`)
+- Test code is the only other place that substitutes implementations
+
+## Red Flags — Stop and Correct
+- `ConcreteClass()` instantiated inside a class body
+- `import` of a concrete infrastructure class inside a domain or application module
+- Method that accepts a flag/enum to select which implementation to use (use polymorphism instead)
+- Test that patches internals of the class under test rather than injecting a substitute
+
+
+## DESIGN-PATTERNS
+
+# Design Patterns
+
+## Core Rule
+Apply structural patterns to eliminate `isinstance` checks, `if/elif` type-dispatch chains, and
+duplicated logic. A pattern is the fix, not the decoration.
+
+## Pattern Quick Reference
+
+| Smell | Pattern | Fix |
+|---|---|---|
+| `if type == "A": ... elif type == "B":` | Strategy | One class per behaviour; caller holds the variant |
+| Object creation buried in application logic | Factory / Factory Method | Centralise creation, return abstract type |
+| Many callers updated when state changes | Observer | Callers subscribe; emitter calls `notify()` |
+| Incompatible interfaces must work together | Adapter | Wrap the foreign interface; expose the local protocol |
+| Step sequence fixed, some steps vary | Template Method | Base class owns the skeleton; subclasses override steps |
+| Repeated `if feature_flag:` throughout code | Decorator | Compose behaviours at the composition root |
+
+## Usage Rules
+- Apply a pattern only when the smell exists — not speculatively
+- Name the participant classes after the pattern role: `*Strategy`, `*Factory`, `*Observer`, `*Adapter`
+- Keep pattern participants in separate modules; avoid god-module pattern files
+- Prefer composition over inheritance for Strategy and Decorator
+
+## Red Flags — Stop and Correct
+- `match`/`switch` dispatching on an object's type or an enum variant
+- `isinstance` check before calling a method (fix the type hierarchy instead)
+- New variant requires editing an existing class body (violates Open/Closed)
+- Pattern introduced with only one concrete implementation (premature — wait for the second)

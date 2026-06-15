@@ -182,3 +182,150 @@ Before every `git commit`, all of the following must be true. No exceptions.
 
 ## When In Doubt
 If you are unsure whether a commit is ready: it is not ready. Fix the uncertainty first.
+
+
+## TYPE-SAFETY
+
+# Type Safety
+
+## Core Rule
+Every function and method must have fully annotated parameters and return type.
+Run `mypy argus/` before committing — it must exit 0.
+
+## Annotation Requirements
+- All parameters annotated — no bare untyped arguments
+- All return types explicit — including `-> None`
+- Use `X | None` syntax (not `Optional[X]`)
+- Use built-in generics: `list[str]`, `dict[str, int]` (not `List`, `Dict` from `typing`)
+
+## `Any` Policy
+`Any` is permitted **only at external data boundaries** (YAML, JSON, CLI input).
+Assign the unstructured value to a typed local variable as soon as its shape is known.
+`Any` in function signatures is never permitted.
+
+## Red Flags — Stop and Correct
+- Unannotated function parameter or return type
+- `Any` in a function signature
+- `Optional[X]` instead of `X | None`
+- `List`, `Dict`, `Tuple` imported from `typing` (use built-ins)
+- mypy exits non-zero
+
+
+## ERROR-HANDLING
+
+# Error Handling
+
+## Exception Design
+- All custom exceptions inherit from a project-level base exception (e.g. `ArgusError`)
+- Exception names end in `Error`
+- Define the project base exception in the project's root package (e.g. `argus/__init__.py`); define subclass exceptions in the module that raises them, importing the base
+- Exceptions carry a human-readable message sufficient to understand the failure
+
+## Raise vs Return
+- Raise for conditions the caller cannot reasonably anticipate or recover from inline
+- Return for expected outcomes the caller must handle (results, None, empty collections)
+- Never use exceptions for control flow
+
+## Catching Rules
+- Catch only at system boundaries (CLI entry points, public API surfaces); test fixtures and context managers are exempt
+- Catch only the specific exception types you can handle — never bare `except:` or `except Exception:`
+- Never swallow exceptions silently (`except ...: pass` is always wrong)
+- When catching to re-raise with context, use `raise NewError(...) from original`
+
+## Red Flags — Stop and Correct
+- Custom exception inherits directly from `Exception` without a project base class
+- `except:` or `except Exception:` anywhere except a top-level CLI handler
+- `except ...: pass` (silent swallow)
+- try/except inside a function that is not a system boundary
+- Exception name does not end in `Error`
+
+
+## DOCUMENTATION-STANDARDS
+
+# Documentation Standards
+
+## Docstring Requirements
+- All public classes must have a one-line docstring describing their purpose
+- All public methods and functions must have a one-line docstring
+- All Click CLI commands must have a one-line docstring (used by `--help`)
+- `__init__` methods are exempt — document the class instead
+- Private methods (prefixed `_`) are exempt
+
+## Docstring Style
+- One sentence, imperative mood: "Load packs from the search path." not "Loads packs..."
+- No restating the function name: `def load():` → not "Load the load."
+- Fits on one line — if you need more, the function probably does too much
+
+## Comment Discipline
+- Write comments only when the WHY is non-obvious: a hidden constraint, a workaround,
+  a subtle invariant, or behaviour that would surprise a reader
+- Never explain WHAT the code does — well-named identifiers already do that
+- Never reference the current task, ticket, or caller in a comment
+
+## Red Flags — Stop and Correct
+- Public class, method, or CLI command with no docstring
+- Docstring that restates the function name or explains what the code does
+- Comment that says what the code does rather than why
+- Multi-line docstring on a function under 10 lines
+
+
+## DEPENDENCY-INJECTION
+
+# Dependency Injection
+
+## Core Rule
+Depend on abstractions, not concretions. Inject all dependencies via constructor — never
+instantiate collaborators inside a class body.
+
+## Constructor Injection
+- Accept dependencies as constructor parameters typed to abstract interfaces (Protocol / ABC)
+- Never call `ConcreteClass()` inside a class body; receive it as a parameter instead
+- Store injected dependencies as instance attributes; do not pass them through method chains
+
+## Abstract Boundaries
+- Define a Protocol or ABC for every dependency that has more than one conceivable implementation
+- Application-layer classes depend only on those abstractions, never on concrete imports from
+  infrastructure layers (databases, HTTP clients, file system adapters)
+
+## Composition Root
+- Wire concrete implementations to abstractions in exactly one place: the entry point (CLI, app
+  factory, `main()`)
+- Test code is the only other place that substitutes implementations
+
+## Red Flags — Stop and Correct
+- `ConcreteClass()` instantiated inside a class body
+- `import` of a concrete infrastructure class inside a domain or application module
+- Method that accepts a flag/enum to select which implementation to use (use polymorphism instead)
+- Test that patches internals of the class under test rather than injecting a substitute
+
+
+## DESIGN-PATTERNS
+
+# Design Patterns
+
+## Core Rule
+Apply structural patterns to eliminate `isinstance` checks, `if/elif` type-dispatch chains, and
+duplicated logic. A pattern is the fix, not the decoration.
+
+## Pattern Quick Reference
+
+| Smell | Pattern | Fix |
+|---|---|---|
+| `if type == "A": ... elif type == "B":` | Strategy | One class per behaviour; caller holds the variant |
+| Object creation buried in application logic | Factory / Factory Method | Centralise creation, return abstract type |
+| Many callers updated when state changes | Observer | Callers subscribe; emitter calls `notify()` |
+| Incompatible interfaces must work together | Adapter | Wrap the foreign interface; expose the local protocol |
+| Step sequence fixed, some steps vary | Template Method | Base class owns the skeleton; subclasses override steps |
+| Repeated `if feature_flag:` throughout code | Decorator | Compose behaviours at the composition root |
+
+## Usage Rules
+- Apply a pattern only when the smell exists — not speculatively
+- Name the participant classes after the pattern role: `*Strategy`, `*Factory`, `*Observer`, `*Adapter`
+- Keep pattern participants in separate modules; avoid god-module pattern files
+- Prefer composition over inheritance for Strategy and Decorator
+
+## Red Flags — Stop and Correct
+- `match`/`switch` dispatching on an object's type or an enum variant
+- `isinstance` check before calling a method (fix the type hierarchy instead)
+- New variant requires editing an existing class body (violates Open/Closed)
+- Pattern introduced with only one concrete implementation (premature — wait for the second)
