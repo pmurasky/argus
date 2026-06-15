@@ -1,0 +1,10 @@
+## Documentation Standards Checklist
+
+- [ ] Every public class has a one-line docstring
+- [ ] Every public method and function has a one-line docstring
+- [ ] Every Click CLI command has a one-line docstring
+- [ ] `__init__` and private (`_`) methods are not documented (exempt)
+- [ ] Docstrings use imperative mood ("Return" not "Returns")
+- [ ] No docstring restates the function name or describes what the code does
+- [ ] Inline comments explain WHY only — not WHAT
+- [ ] No multi-line docstrings on functions under 10 lines
