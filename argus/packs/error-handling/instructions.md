@@ -3,7 +3,7 @@
 ## Exception Design
 - All custom exceptions inherit from a project-level base exception (e.g. `ArgusError`)
 - Exception names end in `Error`
-- Define exceptions in the module that raises them — not in a central `exceptions.py`
+- Define the project base exception in the project's root package (e.g. `argus/__init__.py`); define subclass exceptions in the module that raises them, importing the base
 - Exceptions carry a human-readable message sufficient to understand the failure
 
 ## Raise vs Return
@@ -12,7 +12,7 @@
 - Never use exceptions for control flow
 
 ## Catching Rules
-- Catch only at system boundaries (CLI entry points, public API surfaces)
+- Catch only at system boundaries (CLI entry points, public API surfaces); test fixtures and context managers are exempt
 - Catch only the specific exception types you can handle — never bare `except:` or `except Exception:`
 - Never swallow exceptions silently (`except ...: pass` is always wrong)
 - When catching to re-raise with context, use `raise NewError(...) from original`
