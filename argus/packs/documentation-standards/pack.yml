@@ -1,0 +1,5 @@
+name: documentation-standards
+description: Docstrings on public API and CLI commands; comments only for non-obvious WHY
+category: quality
+requires: []
+platforms: [all]
