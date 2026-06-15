@@ -1,0 +1,5 @@
+name: solid
+description: SOLID principles with mechanically-detectable violation patterns
+category: architecture
+requires: []
+platforms: [all]
