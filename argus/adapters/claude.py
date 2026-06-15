@@ -38,7 +38,7 @@ class ClaudeAdapter(BaseAdapter):
         files = []
         for pack in packs:
             if pack.checklist or pack.examples:
-                parts = [GENERATED_HEADER]
+                parts = [self._skill_frontmatter(pack) + GENERATED_HEADER]
                 if pack.checklist:
                     parts.append(pack.checklist)
                 if pack.examples:
@@ -48,3 +48,8 @@ class ClaudeAdapter(BaseAdapter):
                     content="\n\n".join(parts),
                 ))
         return files
+
+    @staticmethod
+    def _skill_frontmatter(pack: Pack) -> str:
+        description = pack.manifest.get("description", "")
+        return f"---\nname: {pack.name}\ndescription: {description}\n---\n\n"
