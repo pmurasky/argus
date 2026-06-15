@@ -1,0 +1,8 @@
+## Code Quality Checklist
+
+- [ ] No method has cyclomatic complexity > 10 (NIST standard)
+- [ ] No method exceeds 20 lines (excluding blank lines and comments)
+- [ ] No class body exceeds 300 lines
+- [ ] No method has more than 5 parameters
+- [ ] No duplicated logic exists in two or more places
+- [ ] Every extracted method has a name that describes what it does (not how)

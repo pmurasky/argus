@@ -1,0 +1,5 @@
+name: code-quality
+description: NIST-backed code metrics — cyclomatic complexity, method size, class size
+category: quality
+requires: []
+platforms: [all]
