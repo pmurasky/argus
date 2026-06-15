@@ -9,7 +9,7 @@ def stub_pack(
 ) -> Pack:
     return Pack(
         name=name,
-        manifest={"name": name, "category": "workflow", "requires": [], "platforms": ["all"]},
+        manifest={"name": name, "description": f"Use when applying {name} discipline", "category": "workflow", "requires": [], "platforms": ["all"]},
         instructions=f"# {name.upper()} instructions\n\nCore rule for {name}.",
         checklist=checklist,
         examples=examples,

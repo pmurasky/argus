@@ -56,6 +56,22 @@ def test_agents_md_contains_only_instructions():
     assert "## Checklist" not in agents_md.content
 
 
+def test_skill_has_skills_2_frontmatter():
+    packs = [stub_pack("tdd", checklist="## Checklist")]
+    files = ClaudeAdapter().generate(packs)
+    skill = next(f for f in files if f.path == Path(".claude/skills/tdd/SKILL.md"))
+    assert skill.content.startswith("---\n")
+    assert "name: tdd" in skill.content
+    assert "description:" in skill.content
+
+
+def test_skill_frontmatter_uses_pack_description():
+    packs = [stub_pack("tdd", checklist="## Checklist")]
+    files = ClaudeAdapter().generate(packs)
+    skill = next(f for f in files if f.path == Path(".claude/skills/tdd/SKILL.md"))
+    assert "Use when applying tdd discipline" in skill.content
+
+
 def test_all_files_have_generated_header():
     packs = [stub_pack("tdd")]
     files = ClaudeAdapter().generate(packs)
