@@ -4,6 +4,7 @@ packs:
 - solid
 - code-quality
 - pre-commit
+- type-safety
 platforms:
 - claude
 - opencode
