@@ -12,6 +12,9 @@ class ArgusConfig:
     @classmethod
     def from_file(cls, path: Path) -> "ArgusConfig":
         data = yaml.safe_load(path.read_text())
+        missing = [k for k in ("packs", "platforms") if k not in data]
+        if missing:
+            raise ValueError(f".argus.yml is missing required keys: {', '.join(missing)}")
         return cls(
             packs=data["packs"],
             platforms=data["platforms"],

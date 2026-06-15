@@ -1,8 +1,10 @@
 import sys
 from pathlib import Path
 import click
+import yaml
 from argus.config import ArgusConfig
-from argus.generator import Generator
+from argus.generator import Generator, AdapterRegistry, UnknownPlatformError, AdapterConflictError
+from argus.loader import PackLoader, PackNotFoundError
 
 
 @click.group()
@@ -29,7 +31,11 @@ def generate(dry_run: bool, check: bool, project_root: Path):
         sys.exit(1)
 
     config = ArgusConfig.from_file(config_path)
-    files = Generator().run(config, project_root)
+    try:
+        files = Generator().run(config, project_root)
+    except (PackNotFoundError, UnknownPlatformError, AdapterConflictError) as e:
+        click.echo(f"✗ {e}", err=True)
+        sys.exit(1)
 
     if dry_run:
         for f in files:
@@ -53,11 +59,6 @@ def generate(dry_run: bool, check: bool, project_root: Path):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(f.content)
         click.echo(f"  ✓ {f.path}")
-
-
-import yaml
-from argus.loader import PackLoader, PackNotFoundError
-from argus.generator import AdapterRegistry, UnknownPlatformError, AdapterConflictError
 
 
 DEFAULT_PACKS = ["atomic-commit", "tdd", "solid", "code-quality", "pre-commit"]
