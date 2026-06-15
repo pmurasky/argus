@@ -53,3 +53,113 @@ def generate(dry_run: bool, check: bool, project_root: Path):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(f.content)
         click.echo(f"  ✓ {f.path}")
+
+
+import yaml
+from argus.loader import PackLoader, PackNotFoundError
+from argus.generator import AdapterRegistry, UnknownPlatformError, AdapterConflictError
+
+
+DEFAULT_PACKS = ["atomic-commit", "tdd", "solid", "code-quality", "pre-commit"]
+DEFAULT_PLATFORMS = ["claude", "opencode", "copilot", "cursor"]
+
+
+@main.command()
+@click.option(
+    "--project-root",
+    default=".",
+    type=click.Path(path_type=Path),
+)
+def init(project_root: Path):
+    """Scaffold .argus.yml with all available packs and platforms."""
+    config_path = project_root / ".argus.yml"
+    if config_path.exists():
+        if not click.confirm(f"{config_path} already exists. Overwrite?"):
+            return
+    config = {"packs": DEFAULT_PACKS, "platforms": DEFAULT_PLATFORMS}
+    config_path.write_text(yaml.dump(config, default_flow_style=False))
+    click.echo(f"✓ Written: {config_path}")
+    click.echo("Edit .argus.yml to select packs and platforms, then run: argus generate")
+
+
+@main.group()
+def packs():
+    """Manage available packs."""
+
+
+@packs.command("list")
+def packs_list():
+    """Show all available packs."""
+    loader = PackLoader(project_root=Path("."))
+    for name in loader.available_packs():
+        click.echo(f"  {name}")
+
+
+@packs.command("show")
+@click.argument("name")
+def packs_show(name: str):
+    """Print a pack's instructions."""
+    loader = PackLoader(project_root=Path("."))
+    try:
+        pack = loader.load([name])[0]
+        click.echo(pack.instructions)
+    except PackNotFoundError as e:
+        click.echo(str(e), err=True)
+        sys.exit(1)
+
+
+@main.group()
+def platforms():
+    """Manage available platform adapters."""
+
+
+@platforms.command("list")
+def platforms_list():
+    """Show all available platform adapters."""
+    from importlib.metadata import entry_points
+    eps = entry_points(group="argus.adapters")
+    for ep in sorted(eps, key=lambda e: e.name):
+        click.echo(f"  {ep.name}")
+
+
+@main.command()
+@click.option(
+    "--project-root",
+    default=".",
+    type=click.Path(path_type=Path),
+)
+def validate(project_root: Path):
+    """Validate .argus.yml and verify setup."""
+    config_path = project_root / ".argus.yml"
+    failed = False
+
+    if not config_path.exists():
+        click.echo(f"  ✗ .argus.yml not found in {project_root}", err=True)
+        sys.exit(1)
+
+    try:
+        config = ArgusConfig.from_file(config_path)
+        click.echo("  ✓ .argus.yml found and parseable")
+    except Exception as e:
+        click.echo(f"  ✗ .argus.yml parse error: {e}", err=True)
+        sys.exit(1)
+
+    try:
+        PackLoader(project_root, config.custom_packs_dir).load(config.packs)
+        click.echo(f"  ✓ Packs resolved: {', '.join(config.packs)}")
+    except PackNotFoundError as e:
+        click.echo(f"  ✗ {e}", err=True)
+        failed = True
+
+    try:
+        for platform_id in config.platforms:
+            AdapterRegistry.get(platform_id)
+        click.echo(f"  ✓ Platforms resolved: {', '.join(config.platforms)}")
+    except (UnknownPlatformError, AdapterConflictError) as e:
+        click.echo(f"  ✗ {e}", err=True)
+        failed = True
+
+    if failed:
+        sys.exit(1)
+
+    click.echo("\n  All checks passed.")
