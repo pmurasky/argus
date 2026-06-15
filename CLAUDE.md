@@ -384,3 +384,74 @@ List[str]                                 # use list[str]
 data: dict[str, Any] = yaml.safe_load(path.read_text())
 packs: list[str] = data["packs"]         # typed immediately after
 ```
+
+
+## ERROR-HANDLING
+
+# Error Handling
+
+## Exception Design
+- All custom exceptions inherit from a project-level base exception (e.g. `ArgusError`)
+- Exception names end in `Error`
+- Define the project base exception in the project's root package (e.g. `argus/__init__.py`); define subclass exceptions in the module that raises them, importing the base
+- Exceptions carry a human-readable message sufficient to understand the failure
+
+## Raise vs Return
+- Raise for conditions the caller cannot reasonably anticipate or recover from inline
+- Return for expected outcomes the caller must handle (results, None, empty collections)
+- Never use exceptions for control flow
+
+## Catching Rules
+- Catch only at system boundaries (CLI entry points, public API surfaces); test fixtures and context managers are exempt
+- Catch only the specific exception types you can handle — never bare `except:` or `except Exception:`
+- Never swallow exceptions silently (`except ...: pass` is always wrong)
+- When catching to re-raise with context, use `raise NewError(...) from original`
+
+## Red Flags — Stop and Correct
+- Custom exception inherits directly from `Exception` without a project base class
+- `except:` or `except Exception:` anywhere except a top-level CLI handler
+- `except ...: pass` (silent swallow)
+- try/except inside a function that is not a system boundary
+- Exception name does not end in `Error`
+
+
+## Error Handling Checklist
+
+- [ ] All custom exceptions inherit from the project base exception (e.g. `ArgusError`)
+- [ ] Exception names end in `Error`
+- [ ] Exceptions defined in the module that raises them
+- [ ] No bare `except:` or `except Exception:` except at top-level CLI handlers
+- [ ] No silent swallows: `except ...: pass` does not exist
+- [ ] Exceptions only caught at system boundaries
+- [ ] `raise X from original` used when re-raising with context
+
+
+## Error Handling Examples
+
+### Correct
+```python
+class ArgusError(Exception): ...
+class PackNotFoundError(ArgusError): ...  # inherits from base
+
+try:
+    adapter.generate(packs)
+except (PackNotFoundError, UnknownPlatformError) as e:
+    click.echo(f"✗ {e}", err=True)
+    sys.exit(1)
+
+raise PackNotFoundError(f'Unknown pack: "{name}"') from None
+```
+
+### Incorrect
+```python
+class PackNotFoundError(Exception): ...   # missing base class
+except Exception as e: pass              # swallowed, too broad
+except:                                  # bare except
+try: ... except SomeError: pass          # silent swallow
+```
+
+### Re-raise with context
+```python
+except yaml.YAMLError as e:
+    raise ArgusConfigError("Invalid .argus.yml") from e
+```

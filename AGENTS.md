@@ -209,3 +209,32 @@ Assign the unstructured value to a typed local variable as soon as its shape is 
 - `Optional[X]` instead of `X | None`
 - `List`, `Dict`, `Tuple` imported from `typing` (use built-ins)
 - mypy exits non-zero
+
+
+## ERROR-HANDLING
+
+# Error Handling
+
+## Exception Design
+- All custom exceptions inherit from a project-level base exception (e.g. `ArgusError`)
+- Exception names end in `Error`
+- Define the project base exception in the project's root package (e.g. `argus/__init__.py`); define subclass exceptions in the module that raises them, importing the base
+- Exceptions carry a human-readable message sufficient to understand the failure
+
+## Raise vs Return
+- Raise for conditions the caller cannot reasonably anticipate or recover from inline
+- Return for expected outcomes the caller must handle (results, None, empty collections)
+- Never use exceptions for control flow
+
+## Catching Rules
+- Catch only at system boundaries (CLI entry points, public API surfaces); test fixtures and context managers are exempt
+- Catch only the specific exception types you can handle — never bare `except:` or `except Exception:`
+- Never swallow exceptions silently (`except ...: pass` is always wrong)
+- When catching to re-raise with context, use `raise NewError(...) from original`
+
+## Red Flags — Stop and Correct
+- Custom exception inherits directly from `Exception` without a project base class
+- `except:` or `except Exception:` anywhere except a top-level CLI handler
+- `except ...: pass` (silent swallow)
+- try/except inside a function that is not a system boundary
+- Exception name does not end in `Error`

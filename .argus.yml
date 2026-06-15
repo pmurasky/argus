@@ -5,6 +5,7 @@ packs:
 - code-quality
 - pre-commit
 - type-safety
+- error-handling
 platforms:
 - claude
 - opencode
