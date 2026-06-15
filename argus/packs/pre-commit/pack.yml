@@ -1,0 +1,9 @@
+name: pre-commit
+description: Unified pre-commit gate — orchestrates all other packs
+category: process
+requires:
+  - atomic-commit
+  - tdd
+  - solid
+  - code-quality
+platforms: [all]
