@@ -1,0 +1,23 @@
+# Type Safety
+
+## Core Rule
+Every function and method must have fully annotated parameters and return type.
+Run `mypy argus/` before committing — it must exit 0.
+
+## Annotation Requirements
+- All parameters annotated — no bare untyped arguments
+- All return types explicit — including `-> None`
+- Use `X | None` syntax (not `Optional[X]`)
+- Use built-in generics: `list[str]`, `dict[str, int]` (not `List`, `Dict` from `typing`)
+
+## `Any` Policy
+`Any` is permitted **only at external data boundaries** (YAML, JSON, CLI input).
+Assign the unstructured value to a typed local variable as soon as its shape is known.
+`Any` in function signatures is never permitted.
+
+## Red Flags — Stop and Correct
+- Unannotated function parameter or return type
+- `Any` in a function signature
+- `Optional[X]` instead of `X | None`
+- `List`, `Dict`, `Tuple` imported from `typing` (use built-ins)
+- mypy exits non-zero

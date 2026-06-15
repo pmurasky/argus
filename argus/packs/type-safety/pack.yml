@@ -1,0 +1,5 @@
+name: type-safety
+description: Python type annotations — all functions annotated, mypy clean
+category: quality
+requires: []
+platforms: [all]
