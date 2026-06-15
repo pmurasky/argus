@@ -419,7 +419,7 @@ packs: list[str] = data["packs"]         # typed immediately after
 
 - [ ] All custom exceptions inherit from the project base exception (e.g. `ArgusError`)
 - [ ] Exception names end in `Error`
-- [ ] Exceptions defined in the module that raises them
+- [ ] Project base exception in root package; subclass exceptions in the module that raises them
 - [ ] No bare `except:` or `except Exception:` except at top-level CLI handlers
 - [ ] No silent swallows: `except ...: pass` does not exist
 - [ ] Exceptions only caught at system boundaries
