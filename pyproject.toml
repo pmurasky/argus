@@ -15,7 +15,7 @@ dependencies = [
 [project.scripts]
 argus = "argus.cli:main"
 
-[project.entry_points."argus.adapters"]
+[project.entry-points."argus.adapters"]
 claude = "argus.adapters.claude:ClaudeAdapter"
 opencode = "argus.adapters.opencode:OpenCodeAdapter"
 copilot = "argus.adapters.copilot:CopilotAdapter"
