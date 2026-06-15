@@ -1,0 +1,5 @@
+name: atomic-commit
+description: Atomic commit discipline and conventional commits format
+category: workflow
+requires: []
+platforms: [all]

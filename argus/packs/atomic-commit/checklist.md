@@ -1,0 +1,8 @@
+## Atomic Commit Checklist
+
+- [ ] This commit addresses exactly one logical change
+- [ ] The commit message does NOT contain the word "also"
+- [ ] Commit message follows format: `type(scope): description`
+- [ ] Type is one of: feat, fix, test, refactor, docs, chore
+- [ ] All tests pass
+- [ ] This commit could be reverted without affecting any other concern
