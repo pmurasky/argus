@@ -9,6 +9,7 @@ packs:
 - documentation-standards
 - dependency-injection
 - design-patterns
+- refactoring
 platforms:
 - claude
 - opencode
