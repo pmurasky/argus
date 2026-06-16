@@ -1,0 +1,6 @@
+name: testing-strategy
+description: Test at the right layer — unit, integration, and E2E with appropriate doubles
+category: quality
+requires:
+  - tdd
+platforms: [all]
