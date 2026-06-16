@@ -8,7 +8,7 @@ from argus.loader import PackLoader, PackNotFoundError
 
 
 @click.group()
-def main():
+def main() -> None:
     """Argus — AI Agent Engineering Standards Layer"""
 
 
@@ -21,7 +21,7 @@ def main():
     type=click.Path(path_type=Path),
     help="Project root directory (default: current directory)",
 )
-def generate(dry_run: bool, check: bool, project_root: Path):
+def generate(dry_run: bool, check: bool, project_root: Path) -> None:
     """Generate platform-specific files from .argus.yml"""
     config_path = project_root / ".argus.yml"
     if not config_path.exists():
@@ -71,7 +71,7 @@ DEFAULT_PLATFORMS = ["claude", "opencode", "copilot", "cursor"]
     default=".",
     type=click.Path(path_type=Path),
 )
-def init(project_root: Path):
+def init(project_root: Path) -> None:
     """Scaffold .argus.yml with all available packs and platforms."""
     config_path = project_root / ".argus.yml"
     if config_path.exists():
@@ -84,12 +84,12 @@ def init(project_root: Path):
 
 
 @main.group()
-def packs():
+def packs() -> None:
     """Manage available packs."""
 
 
 @packs.command("list")
-def packs_list():
+def packs_list() -> None:
     """Show all available packs."""
     loader = PackLoader(project_root=Path("."))
     for name in loader.available_packs():
@@ -98,7 +98,7 @@ def packs_list():
 
 @packs.command("show")
 @click.argument("name")
-def packs_show(name: str):
+def packs_show(name: str) -> None:
     """Print a pack's instructions."""
     loader = PackLoader(project_root=Path("."))
     try:
@@ -110,12 +110,12 @@ def packs_show(name: str):
 
 
 @main.group()
-def platforms():
+def platforms() -> None:
     """Manage available platform adapters."""
 
 
 @platforms.command("list")
-def platforms_list():
+def platforms_list() -> None:
     """Show all available platform adapters."""
     from importlib.metadata import entry_points
     eps = entry_points(group="argus.adapters")
@@ -129,7 +129,7 @@ def platforms_list():
     default=".",
     type=click.Path(path_type=Path),
 )
-def validate(project_root: Path):
+def validate(project_root: Path) -> None:
     """Validate .argus.yml and verify setup."""
     config_path = project_root / ".argus.yml"
     failed = False
