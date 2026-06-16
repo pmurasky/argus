@@ -1,10 +1,11 @@
 from pathlib import Path
 import yaml
+from argus import ArgusError
 from argus.adapters.base import Pack
 
 
-class PackNotFoundError(Exception):
-    pass
+class PackNotFoundError(ArgusError):
+    """Raised when a requested pack cannot be found on the search path."""
 
 
 class PackLoader:
