@@ -1,16 +1,17 @@
 from importlib.metadata import entry_points
 from pathlib import Path
+from argus import ArgusError
 from argus.adapters.base import BaseAdapter, GeneratedFile
 from argus.config import ArgusConfig
 from argus.loader import PackLoader
 
 
-class AdapterConflictError(Exception):
-    pass
+class AdapterConflictError(ArgusError):
+    """Raised when multiple adapters register the same platform id."""
 
 
-class UnknownPlatformError(Exception):
-    pass
+class UnknownPlatformError(ArgusError):
+    """Raised when a requested platform has no registered adapter."""
 
 
 class AdapterRegistry:
