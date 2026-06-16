@@ -393,3 +393,87 @@ refactor during RED — finish making the test pass first.
 - Adding a new feature during a refactoring commit
 - Making multiple structural changes before running tests
 - Commit message contains both `feat:` and `refactor:` concerns
+
+
+## TESTING-STRATEGY
+
+# Testing Strategy
+
+## Core Rule
+Test at the lowest layer that gives you confidence. More unit tests than integration tests;
+more integration tests than E2E tests. Inverting this pyramid produces a slow, fragile suite.
+
+## The Test Pyramid
+
+        /\
+       /E2E\       ← few, slow, fragile — critical journeys only
+      /------\
+     /Integr. \    ← moderate — only at system boundaries
+    /----------\
+   / Unit Tests \  ← many, fast, isolated — all business logic
+  /--------------\
+
+The pyramid shape is intentional: unit tests are cheap to write and run in milliseconds;
+E2E tests are expensive, slow, and occasionally flaky. Inverting it is a common mistake
+that teams pay for with hours of CI time and fragile suites.
+
+## Unit Tests
+
+**Use for:** Business logic, algorithms, transformations, domain rules — anything that can
+be tested without external dependencies.
+**Characteristics:** No I/O, no network, no database. Milliseconds per test. Deterministic.
+**Coverage:** 80% minimum for changed code (see `tdd` pack).
+**Rule:** If it can be tested without any external dependency, test it here.
+
+## Integration Tests
+
+**Use for:** Code that crosses a system boundary — database queries, external API calls,
+file I/O, message queues, adapter implementations.
+**Characteristics:** Slower than unit tests. Uses real infrastructure or a realistic substitute
+(e.g., an in-memory database, a local test container, a fake HTTP server).
+**Scope is narrow:** Test the integration point itself, not every code path that reaches it.
+One integration test per repository method or adapter — not one per caller.
+**Rule:** If the behavior depends on a real external system, test it here, not in unit tests.
+
+## End-to-End Tests
+
+**Use for:** The 2–3 critical user journeys that must never break regardless of internal changes.
+**Characteristics:** Slow (seconds to minutes), occasionally flaky due to timing and environment,
+expensive to maintain. Tests the whole deployed system.
+**Rule:** If a unit or integration test can answer the question, use that instead. E2E tests
+are a last resort, not a default.
+**Anti-pattern:** Testing every feature E2E. This produces a suite that takes 20+ minutes to
+run and breaks on every UI or API change.
+
+## Test Doubles
+
+Use the simplest double that makes the test work:
+
+| Double | What it is | When to use |
+|---|---|---|
+| **Fake** | A working simplified implementation | Integration tests — in-memory DB, fake HTTP server |
+| **Stub** | Returns canned values, no behavior | Unit tests — when you need a value from a collaborator |
+| **Mock** | Verifies that specific calls were made | Unit tests — when the interaction itself is the assertion |
+
+**Prefer fakes and stubs over mocks.** Mocks assert on HOW code works internally — they
+break when you refactor, even when behavior is correct. Fakes and stubs assert on WHAT
+the code produces — they survive refactoring. See the `dependency-injection` pack for how
+constructor injection makes substitution easy without patching internals.
+
+**Never patch internals to test.** If you need to monkey-patch a private method or module
+internals to write a test, that is a signal to inject the dependency instead.
+
+## Test Execution Tiers
+
+| When | What runs | Why |
+|---|---|---|
+| Before every commit | Unit tests only | Fast, isolated — no reason to skip |
+| Before push | Unit tests + integration tests | Catch boundary failures before teammates see them |
+| CI pipeline | Unit + integration + E2E | Hard gate — failures block merge |
+
+## Red Flags — Stop and Correct
+- E2E test written for a feature that could be covered by a unit test
+- Mock asserting on an internal private method call
+- Integration test covering business logic (that belongs in unit tests)
+- Unit test hitting a real database or network
+- Test suite takes more than 5 minutes to run locally (pyramid is inverted)

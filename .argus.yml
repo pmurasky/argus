@@ -10,6 +10,7 @@ packs:
 - dependency-injection
 - design-patterns
 - refactoring
+- testing-strategy
 platforms:
 - claude
 - opencode
