@@ -1,0 +1,6 @@
+name: refactoring
+description: Refactor safely — detect code smells, one change at a time, never break tests
+category: quality
+requires:
+  - tdd
+platforms: [all]

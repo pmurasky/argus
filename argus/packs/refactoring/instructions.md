@@ -1,0 +1,60 @@
+# Refactoring
+
+## Core Rule
+Refactoring means changing code structure without changing external behavior. Never add new
+functionality in the same commit as a refactor — that is always a separate change.
+
+## When to Refactor
+
+**Rule of Three:** The first time you write something, just do it. The second time you do
+something similar, note the duplication. The third time, refactor.
+
+**Preparatory refactoring:** Before adding a feature, refactor the code to make the feature
+easy to add. "Make the change easy, then make the easy change." — Kent Beck. The refactor
+is one commit; the feature is the next.
+
+**TDD Refactor phase:** The REFACTOR step only happens after GREEN (tests passing). Never
+refactor during RED — finish making the test pass first.
+
+**Never refactor when:**
+- Tests are failing
+- You are in the RED phase of TDD
+- You are mid-feature (finish the feature first, then clean up)
+
+## Code Smells — What Signals Refactoring
+
+### Bloaters (things that grew too large)
+- **Long Method** — any method over 20 lines → Extract Method
+- **Large Class** — class over 300 lines → Extract Class
+- **Long Parameter List** — more than 5 parameters → Introduce Parameter Object
+- **Data Clumps** — same group of variables together in multiple places → Extract Class
+- **Primitive Obsession** — using a `str` or `int` where a small class would be clearer → Replace Primitive with Object
+
+### Dispensables (things that add no value)
+- **Duplicate Code** — same logic in two or more places → Extract Function
+- **Dead Code** — unreachable or unused code → Delete it
+- **Speculative Generality** — abstractions nobody uses yet → Delete it
+- **Excessive Comments** — a comment explaining what the code does signals unclear code → Rename or extract until the comment is unnecessary
+
+### Object-Orientation Abusers
+- **Switch/Match on type** — dispatching behavior based on an object's type → Strategy pattern (see design-patterns pack)
+- **Refused Bequest** — subclass ignores most of what the parent provides → Rework the hierarchy
+
+### Couplers (inappropriate dependencies)
+- **Feature Envy** — a method uses another class's data more than its own → Move Method
+- **Message Chains** — `a.b().c().d()` → Extract Method or Hide Delegate
+- **Inappropriate Intimacy** — two classes know too much about each other's internals → Extract Class or Move Method
+
+## How to Refactor Safely
+
+1. **Confirm tests pass** before starting — if they don't, fix that first
+2. **Make one change** — extract one method, rename one variable, move one class
+3. **Run tests** after each change — if they fail, undo and reconsider
+4. **Commit** when tests pass and the change is complete: `refactor: <what you improved>`
+5. **Never** mix refactoring and new behavior in the same commit
+
+## Red Flags — Stop and Correct
+- Refactoring with failing tests
+- Adding a new feature during a refactoring commit
+- Making multiple structural changes before running tests
+- Commit message contains both `feat:` and `refactor:` concerns
