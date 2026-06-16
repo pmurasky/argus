@@ -1,9 +1,11 @@
 import sys
 from pathlib import Path
+
 import click
 import yaml
+
 from argus.config import ArgusConfig
-from argus.generator import Generator, AdapterRegistry, UnknownPlatformError, AdapterConflictError
+from argus.generator import AdapterConflictError, AdapterRegistry, Generator, UnknownPlatformError
 from argus.loader import PackLoader, PackNotFoundError
 
 

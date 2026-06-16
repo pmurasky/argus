@@ -1,5 +1,6 @@
 from pathlib import Path
-from argus.adapters.base import BaseAdapter, GeneratedFile, Pack, GENERATED_HEADER
+
+from argus.adapters.base import GENERATED_HEADER, BaseAdapter, GeneratedFile, Pack
 
 
 class CopilotAdapter(BaseAdapter):

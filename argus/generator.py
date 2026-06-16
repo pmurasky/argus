@@ -1,5 +1,6 @@
 from importlib.metadata import entry_points
 from pathlib import Path
+
 from argus import ArgusError
 from argus.adapters.base import BaseAdapter, GeneratedFile
 from argus.config import ArgusConfig

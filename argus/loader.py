@@ -1,5 +1,7 @@
 from pathlib import Path
+
 import yaml
+
 from argus import ArgusError
 from argus.adapters.base import Pack
 
