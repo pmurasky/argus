@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "argus-standards"
-version = "0.1.0"
+version = "0.1.1"
 description = "AI Agent Engineering Standards Layer"
 authors = [{name = "Peter Murasky Jr", email = "peter.murasky@gmail.com"}]
 license = {text = "MIT"}
