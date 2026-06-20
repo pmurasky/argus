@@ -18,12 +18,13 @@ def _mock_generator(files: list[GeneratedFile]):
 
 def test_version_flag_outputs_version():
     # Given
+    from importlib.metadata import version
     runner = CliRunner()
     # When
     result = runner.invoke(main, ["--version"])
     # Then
     assert result.exit_code == 0
-    assert "0.1.0" in result.output
+    assert version("argus-standards") in result.output
 
 
 def test_generate_writes_files(tmp_path):
