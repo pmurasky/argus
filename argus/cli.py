@@ -10,6 +10,7 @@ from argus.loader import PackLoader, PackNotFoundError
 
 
 @click.group()
+@click.version_option(package_name="argus-standards")
 def main() -> None:
     """Argus — AI Agent Engineering Standards Layer"""
 

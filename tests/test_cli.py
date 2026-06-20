@@ -16,6 +16,16 @@ def _mock_generator(files: list[GeneratedFile]):
     return mock
 
 
+def test_version_flag_outputs_version():
+    # Given
+    runner = CliRunner()
+    # When
+    result = runner.invoke(main, ["--version"])
+    # Then
+    assert result.exit_code == 0
+    assert "0.1.0" in result.output
+
+
 def test_generate_writes_files(tmp_path):
     _write_config(tmp_path)
     output_file = GeneratedFile(path=Path("CLAUDE.md"), content="# content")
