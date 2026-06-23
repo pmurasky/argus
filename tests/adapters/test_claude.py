@@ -40,12 +40,13 @@ def test_claude_skips_skill_for_pack_without_checklist_or_examples():
     assert Path(".claude/skills/solid/SKILL.md") not in paths
 
 
-def test_claude_md_includes_instructions_and_checklist():
+def test_claude_md_points_to_rules_directory():
     packs = [stub_pack("tdd", checklist="## Checklist")]
     files = ClaudeAdapter().generate(packs)
     claude_md = next(f for f in files if f.path == Path("CLAUDE.md"))
-    assert "TDD instructions" in claude_md.content
-    assert "## Checklist" in claude_md.content
+    assert ".claude/rules/" in claude_md.content
+    assert "TDD instructions" not in claude_md.content
+    assert "## Checklist" not in claude_md.content
 
 
 def test_agents_md_contains_only_instructions():

@@ -10,21 +10,15 @@ class ClaudeAdapter(BaseAdapter):
     def generate(self, packs: list[Pack]) -> list[GeneratedFile]:
         files = [
             self._agents_md(packs),
-            self._claude_md(packs),
+            self._claude_md(),
             *self._rules(packs),
             *self._skills(packs),
         ]
         return files
 
-    def _claude_md(self, packs: list[Pack]) -> GeneratedFile:
-        sections = [GENERATED_HEADER + "# Engineering Standards\n"]
-        for pack in packs:
-            sections.append(f"## {pack.name.upper()}\n\n{pack.instructions}")
-            if pack.checklist:
-                sections.append(pack.checklist)
-            if pack.examples:
-                sections.append(pack.examples)
-        return GeneratedFile(path=Path("CLAUDE.md"), content="\n\n".join(sections))
+    def _claude_md(self) -> GeneratedFile:
+        content = GENERATED_HEADER + "# Engineering Standards\n\nRules are in `.claude/rules/`. All apply to every commit.\n"
+        return GeneratedFile(path=Path("CLAUDE.md"), content=content)
 
     def _rules(self, packs: list[Pack]) -> list[GeneratedFile]:
         return [
