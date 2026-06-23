@@ -17,8 +17,9 @@ class ClaudeAdapter(BaseAdapter):
         return files
 
     def _claude_md(self) -> GeneratedFile:
-        content = GENERATED_HEADER + "# Engineering Standards\n\nRules are in `.claude/rules/`. All apply to every commit.\n"
-        return GeneratedFile(path=Path("CLAUDE.md"), content=content)
+        body = "# Engineering Standards\n\nRules are in `.claude/rules/`."
+        body += " All apply to every commit.\n"
+        return GeneratedFile(path=Path("CLAUDE.md"), content=GENERATED_HEADER + body)
 
     def _rules(self, packs: list[Pack]) -> list[GeneratedFile]:
         return [
