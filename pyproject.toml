@@ -32,6 +32,7 @@ dev = [
     "ruff>=0.4",
     "pytest-cov>=4.0",
     "types-PyYAML>=6.0",
+    "commitizen>=3.0",
 ]
 
 [project.urls]
@@ -70,6 +71,12 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]
+
+[tool.commitizen]
+version_provider = "pep621"
+tag_format = "v$version"
+update_changelog_on_bump = true
+changelog_incremental = true
 
 [tool.coverage.run]
 source = ["argus"]
