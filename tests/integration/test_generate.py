@@ -140,3 +140,33 @@ def test_type_safety_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "mypy" in (tmp_path / ".claude/rules/type-safety.md").read_text()
+
+
+ERROR_HANDLING_CONFIG = """\
+packs:
+  - error-handling
+platforms:
+  - claude
+"""
+
+
+def test_error_handling_pack_appears_in_packs_list():
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "error-handling" in result.output
+
+
+def test_error_handling_pack_show_renders_content():
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "error-handling"])
+    assert result.exit_code == 0
+    assert "system boundaries" in result.output
+
+
+def test_error_handling_pack_generate_injects_content(tmp_path):
+    (tmp_path / ".argus.yml").write_text(ERROR_HANDLING_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "system boundaries" in (tmp_path / ".claude/rules/error-handling.md").read_text()
