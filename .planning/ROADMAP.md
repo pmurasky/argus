@@ -79,7 +79,11 @@ Plans:
   3. User can add `documentation-standards` to `.argus.yml` packs and generated files contain docstring and comment discipline rules.
   4. `argus packs list` shows all three new packs.
   5. `argus packs show type-safety` (and the other two) displays the pack content.
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 19-01-PLAN.md — type-safety: 3 integration tests + replace `mypy argus/` with `mypy .`
+- [ ] 19-02-PLAN.md — error-handling: 3 integration tests + generalize Argus class names
+- [ ] 19-03-PLAN.md — documentation-standards: 3 integration tests + generalize PackLoader/available_packs
 
 ### Phase 20: Security Pack
 **Goal**: Users can apply an OWASP-aligned `security` pack that injects input validation and Top 10 defensive rules into every agent instruction file.
@@ -146,7 +150,7 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 |-------|-----------|----------------|--------|-----------|
 | 1–17. Foundation | v1.0 | — | Complete | 2026-06-15 |
 | 18. Gemini CLI Adapter | 2/2 | Complete    | 2026-06-24 | - |
-| 19. Promoted Process Packs | v1.1 | 0/TBD | Not started | - |
+| 19. Promoted Process Packs | v1.1 | 0/3 | Planned | - |
 | 20. Security Pack | v1.1 | 0/TBD | Not started | - |
 | 21. Python & TypeScript Language Packs | v1.1 | 0/TBD | Not started | - |
 | 22. Go, Java & Kotlin Language Packs | v1.1 | 0/TBD | Not started | - |
