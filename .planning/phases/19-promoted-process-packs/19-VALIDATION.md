@@ -41,12 +41,12 @@ created: 2026-06-23
 | 19-01-01 | 01 | 1 | PACK-02 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_type_safety_pack_appears_in_packs_list -x` | ❌ Wave 0 | ⬜ pending |
 | 19-01-02 | 01 | 1 | PACK-02 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_type_safety_pack_show_renders_content -x` | ❌ Wave 0 | ⬜ pending |
 | 19-01-03 | 01 | 1 | PACK-02 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_type_safety_pack_generate_injects_content -x` | ❌ Wave 0 | ⬜ pending |
-| 19-02-01 | 02 | 1 | PACK-03 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_error_handling_pack_appears_in_packs_list -x` | ❌ Wave 0 | ⬜ pending |
-| 19-02-02 | 02 | 1 | PACK-03 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_error_handling_pack_show_renders_content -x` | ❌ Wave 0 | ⬜ pending |
-| 19-02-03 | 02 | 1 | PACK-03 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_error_handling_pack_generate_injects_content -x` | ❌ Wave 0 | ⬜ pending |
-| 19-03-01 | 03 | 2 | PACK-04 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_documentation_standards_pack_appears_in_packs_list -x` | ❌ Wave 0 | ⬜ pending |
-| 19-03-02 | 03 | 2 | PACK-04 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_documentation_standards_pack_show_renders_content -x` | ❌ Wave 0 | ⬜ pending |
-| 19-03-03 | 03 | 2 | PACK-04 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_documentation_standards_pack_generate_injects_content -x` | ❌ Wave 0 | ⬜ pending |
+| 19-02-01 | 02 | 2 | PACK-03 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_error_handling_pack_appears_in_packs_list -x` | ❌ Wave 0 | ⬜ pending |
+| 19-02-02 | 02 | 2 | PACK-03 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_error_handling_pack_show_renders_content -x` | ❌ Wave 0 | ⬜ pending |
+| 19-02-03 | 02 | 2 | PACK-03 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_error_handling_pack_generate_injects_content -x` | ❌ Wave 0 | ⬜ pending |
+| 19-03-01 | 03 | 3 | PACK-04 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_documentation_standards_pack_appears_in_packs_list -x` | ❌ Wave 0 | ⬜ pending |
+| 19-03-02 | 03 | 3 | PACK-04 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_documentation_standards_pack_show_renders_content -x` | ❌ Wave 0 | ⬜ pending |
+| 19-03-03 | 03 | 3 | PACK-04 | integration | `.venv/bin/pytest tests/integration/test_generate.py::test_documentation_standards_pack_generate_injects_content -x` | ❌ Wave 0 | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
