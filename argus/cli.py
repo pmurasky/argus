@@ -65,7 +65,7 @@ def generate(dry_run: bool, check: bool, project_root: Path) -> None:
 
 
 DEFAULT_PACKS = ["atomic-commit", "tdd", "solid", "code-quality", "pre-commit"]
-DEFAULT_PLATFORMS = ["claude", "opencode", "copilot", "cursor"]
+DEFAULT_PLATFORMS = ["claude", "opencode", "copilot", "cursor", "gemini"]
 
 
 @main.command()

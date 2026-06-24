@@ -48,6 +48,7 @@ claude = "argus.adapters.claude:ClaudeAdapter"
 opencode = "argus.adapters.opencode:OpenCodeAdapter"
 copilot = "argus.adapters.copilot:CopilotAdapter"
 cursor = "argus.adapters.cursor:CursorAdapter"
+gemini = "argus.adapters.gemini:GeminiAdapter"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
