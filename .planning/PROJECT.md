@@ -31,6 +31,9 @@ One command, one config, all AI coding platforms — engineering discipline inje
 <!-- Current milestone scope — v1.1 -->
 
 - PLT-01: User can generate GEMINI.md for Gemini CLI by adding `gemini` to `.argus.yml` platforms — Validated in Phase 18: Gemini CLI Adapter
+- PACK-02: type-safety pack discoverable, renderable, injectable, no Argus-specific paths — Validated in Phase 19: Promoted Process Packs
+- PACK-03: error-handling pack discoverable, renderable, injectable, no Argus-specific class names — Validated in Phase 19: Promoted Process Packs
+- PACK-04: documentation-standards pack discoverable, renderable, injectable, no Argus-specific names — Validated in Phase 19: Promoted Process Packs
 
 ### Out of Scope
 
@@ -47,7 +50,7 @@ One command, one config, all AI coding platforms — engineering discipline inje
 - **Pack gap:** `awesome-cursorrules` has 163+ community rules. Argus has 5 process packs. Language/framework/security packs are the biggest unmet demand.
 - **Skills.sh (Jan 2026):** npm-style skill package manager working across Claude Code, Codex CLI, Cursor — potential distribution channel for packs.
 - **Architecture:** Clean SOLID design. New platform = one adapter file, no existing code changes. New pack = one new directory.
-- **Test coverage:** 91 tests, 132 collected; coverage at 46% (below 80% threshold).
+- **Test coverage:** 148 tests pass; coverage at 94.88% (above 80% threshold).
 - **Version:** 0.1.1. PyPI CI workflow wired (tag-triggered publish).
 - **Always run tests with `.venv/bin/pytest`** — system python3 doesn't have argus-standards installed.
 
@@ -69,4 +72,4 @@ One command, one config, all AI coding platforms — engineering discipline inje
 | hatchling build backend | Modern, fast, zero config | ✓ Good |
 
 ---
-*Last updated: 2026-06-24 — Phase 18 complete (Gemini CLI Adapter); 5 adapters now supported*
+*Last updated: 2026-06-24 — Phase 19 complete (Promoted Process Packs); type-safety, error-handling, documentation-standards packs now general-purpose*
