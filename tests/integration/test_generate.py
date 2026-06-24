@@ -1,7 +1,6 @@
-from pathlib import Path
 from click.testing import CliRunner
-from argus.cli import main
 
+from argus.cli import main
 
 FULL_CONFIG = """\
 packs:
@@ -12,6 +11,13 @@ platforms:
   - opencode
   - copilot
   - cursor
+"""
+
+GEMINI_CONFIG = """\
+packs:
+  - tdd
+platforms:
+  - gemini
 """
 
 
@@ -91,3 +97,13 @@ def test_check_mode_exits_zero_when_files_current(tmp_path):
     runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     result = runner.invoke(main, ["generate", "--check", "--project-root", str(tmp_path)])
     assert result.exit_code == 0
+
+
+def test_generate_produces_gemini_files(tmp_path):
+    """Given a config with gemini platform, generate writes GEMINI.md with pack content."""
+    (tmp_path / ".argus.yml").write_text(GEMINI_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert (tmp_path / "GEMINI.md").exists()
+    assert "TDD" in (tmp_path / "GEMINI.md").read_text()
