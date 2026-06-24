@@ -1,6 +1,6 @@
 ## Error Handling Checklist
 
-- [ ] All custom exceptions inherit from the project base exception (e.g. `ArgusError`)
+- [ ] All custom exceptions inherit from the project base exception (e.g. `AppError`)
 - [ ] Exception names end in `Error`
 - [ ] Project base exception in root package; subclass exceptions in the module that raises them
 - [ ] No bare `except:` or `except Exception:` except at top-level CLI handlers
