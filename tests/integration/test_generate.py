@@ -107,3 +107,36 @@ def test_generate_produces_gemini_files(tmp_path):
     assert result.exit_code == 0, result.output
     assert (tmp_path / "GEMINI.md").exists()
     assert "TDD" in (tmp_path / "GEMINI.md").read_text()
+
+
+TYPE_SAFETY_CONFIG = """\
+packs:
+  - type-safety
+platforms:
+  - claude
+"""
+
+
+def test_type_safety_pack_appears_in_packs_list():
+    """Given packs list is invoked, type-safety appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "type-safety" in result.output
+
+
+def test_type_safety_pack_show_renders_content():
+    """Given packs show type-safety is invoked, mypy appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "type-safety"])
+    assert result.exit_code == 0
+    assert "mypy" in result.output
+
+
+def test_type_safety_pack_generate_injects_content(tmp_path):
+    """Given a type-safety+claude config, generate writes mypy content to .claude/rules/type-safety.md."""
+    (tmp_path / ".argus.yml").write_text(TYPE_SAFETY_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "mypy" in (tmp_path / ".claude/rules/type-safety.md").read_text()
