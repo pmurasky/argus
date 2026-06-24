@@ -1,0 +1,12 @@
+{
+  "milestone": "v1.1",
+  "executor_model": "sonnet",
+  "planner_model": "opus",
+  "researcher_model": "sonnet",
+  "synthesizer_model": "sonnet",
+  "roadmapper_model": "opus",
+  "commit_docs": true,
+  "workflow": {
+    "research": true
+  }
+}
