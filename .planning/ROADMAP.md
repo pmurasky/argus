@@ -1,0 +1,151 @@
+# Roadmap: Argus — AI Agent Engineering Standards Layer
+
+## Milestones
+
+- ✅ **v1.0 Foundation** - Phases 1–17 (shipped 2026-06-15)
+- 🚧 **v1.1 Pack Expansion** - Phases 18–24 (in progress)
+
+## Phases
+
+<details>
+<summary>✅ v1.0 Foundation (Phases 1–17) - SHIPPED 2026-06-15</summary>
+
+Shipped CLI (`init`, `generate`, `packs list/show`, `platforms list`, `validate`), 5 built-in
+process packs, 4 platform adapters (claude, opencode, copilot, cursor), custom pack loading,
+AGENTS.md generation, and PyPI publish CI workflow. Published as `argus-standards` v0.1.1.
+
+</details>
+
+---
+
+### 🚧 v1.1 Pack Expansion (In Progress)
+
+**Milestone Goal:** Expand Argus from 5 process packs and 4 platforms to 13 packs, 5 platforms,
+and a smarter CLI — making Argus useful for any language or framework team.
+
+#### Phase 18: Gemini CLI Adapter
+
+- [ ] **Phase 18: Gemini CLI Adapter** - Add `gemini` as a fifth supported platform
+
+#### Phase 19: Promoted Process Packs
+
+- [ ] **Phase 19: Promoted Process Packs** - Promote type-safety, error-handling, and documentation-standards from `.claude/rules/` to built-in packs
+
+#### Phase 20: Security Pack
+
+- [ ] **Phase 20: Security Pack** - Author new OWASP-aligned security pack
+
+#### Phase 21: Python & TypeScript Language Packs
+
+- [ ] **Phase 21: Python & TypeScript Language Packs** - Ship `python` and `typescript` language packs
+
+#### Phase 22: Go, Java & Kotlin Language Packs
+
+- [ ] **Phase 22: Go, Java & Kotlin Language Packs** - Ship `go`, `java`, and `kotlin` language packs
+
+#### Phase 23: Python & JavaScript Framework Packs
+
+- [ ] **Phase 23: Python & JavaScript Framework Packs** - Ship `fastapi` and `nextjs` framework packs
+
+#### Phase 24: Java Framework Packs & CLI Improvements
+
+- [ ] **Phase 24: Java Framework Packs & CLI Improvements** - Ship `spring` and `mockito` packs; add coverage gate, upgrade command, and platform auto-detection
+
+---
+
+## Phase Details
+
+### Phase 18: Gemini CLI Adapter
+**Goal**: Users can target Gemini CLI as a platform, generating `GEMINI.md` alongside all other platform files in one `argus generate` run.
+**Depends on**: Phase 17 (v1.0 complete)
+**Requirements**: PLT-01
+**Success Criteria** (what must be TRUE):
+  1. User adds `gemini` to platforms in `.argus.yml` and `argus generate` writes `GEMINI.md` to the project root.
+  2. `argus platforms list` includes `gemini` in its output.
+  3. `GEMINI.md` content matches the pack rules configured — identical in substance to the claude adapter output for the same pack set.
+  4. No existing adapter or test is modified to add this platform (adapter is a single new file).
+**Plans**: TBD
+
+### Phase 19: Promoted Process Packs
+**Goal**: The `type-safety`, `error-handling`, and `documentation-standards` packs are available as built-in Argus packs, promoting content already proven in `.claude/rules/`.
+**Depends on**: Phase 18
+**Requirements**: PACK-02, PACK-03, PACK-04
+**Success Criteria** (what must be TRUE):
+  1. User can add `type-safety` to `.argus.yml` packs and `argus generate` injects full type annotation rules into all platform files.
+  2. User can add `error-handling` to `.argus.yml` packs and generated files contain exception hierarchy and catch-only-at-boundaries rules.
+  3. User can add `documentation-standards` to `.argus.yml` packs and generated files contain docstring and comment discipline rules.
+  4. `argus packs list` shows all three new packs.
+  5. `argus packs show type-safety` (and the other two) displays the pack content.
+**Plans**: TBD
+
+### Phase 20: Security Pack
+**Goal**: Users can apply an OWASP-aligned `security` pack that injects input validation and Top 10 defensive rules into every agent instruction file.
+**Depends on**: Phase 19
+**Requirements**: PACK-01
+**Success Criteria** (what must be TRUE):
+  1. User adds `security` to `.argus.yml` packs and generated files contain OWASP Top 10 guidance and input validation rules.
+  2. `argus packs show security` displays the full security pack content.
+  3. Security rules are specific enough to guide an AI agent (not generic platitudes — concrete rule per OWASP category).
+**Plans**: TBD
+
+### Phase 21: Python & TypeScript Language Packs
+**Goal**: Users working in Python or TypeScript can apply language-specific packs that inject idiomatic style, type discipline, and ecosystem conventions into agent instruction files.
+**Depends on**: Phase 20
+**Requirements**: LANG-01, LANG-02
+**Success Criteria** (what must be TRUE):
+  1. User adds `python` pack and generated files contain PEP 8 style, type hint requirements, dataclass guidance, and pythonic idiom rules.
+  2. User adds `typescript` pack and generated files contain strict mode mandate, interface vs type guidance, generics usage, and no-any rules.
+  3. Both packs appear in `argus packs list` under a recognizable language category.
+  4. `argus packs show python` and `argus packs show typescript` each display their full content.
+**Plans**: TBD
+
+### Phase 22: Go, Java & Kotlin Language Packs
+**Goal**: Users working in Go, Java, or Kotlin can apply language-specific packs that codify the idioms and conventions most important for AI agents to follow in each ecosystem.
+**Depends on**: Phase 21
+**Requirements**: LANG-03, LANG-04, LANG-05
+**Success Criteria** (what must be TRUE):
+  1. User adds `go` pack and generated files contain Go error handling conventions, interface design, goroutine guidance, and package naming rules.
+  2. User adds `java` pack and generated files contain Java OOP conventions, common patterns, and JVM best practices.
+  3. User adds `kotlin` pack and generated files contain null safety idioms, coroutine patterns, and extension function guidance.
+  4. All three packs appear in `argus packs list` and respond to `argus packs show <name>`.
+**Plans**: TBD
+
+### Phase 23: Python & JavaScript Framework Packs
+**Goal**: Users building FastAPI APIs or Next.js applications can apply framework packs that give AI agents precise, actionable rules for those ecosystems.
+**Depends on**: Phase 22
+**Requirements**: FWRK-01, FWRK-02
+**Success Criteria** (what must be TRUE):
+  1. User adds `fastapi` pack and generated files contain dependency injection patterns, async/await discipline, Pydantic model guidance, and router organization rules.
+  2. User adds `nextjs` pack and generated files contain App Router conventions, server component vs client component guidance, React hooks discipline, and TypeScript integration rules.
+  3. Both packs appear in `argus packs list` and respond to `argus packs show <name>`.
+**Plans**: TBD
+
+### Phase 24: Java Framework Packs & CLI Improvements
+**Goal**: Users on Java/Spring stacks can apply Spring and Mockito packs; the CLI gains a coverage gate, an upgrade command, and automatic platform detection during `argus init`.
+**Depends on**: Phase 23
+**Requirements**: FWRK-03, FWRK-04, CLI-01, CLI-02, CLI-03
+**Success Criteria** (what must be TRUE):
+  1. User adds `spring` pack and generated files contain Spring Boot conventions, IoC container guidance, JPA patterns, and REST API design rules.
+  2. User adds `mockito` pack and generated files contain mock discipline rules: `@Mock` vs `@Spy`, argument captors, and verify patterns.
+  3. Running the test suite after all v1.1 changes achieves 80% unit test coverage on all changed modules (project's stated standard).
+  4. `argus upgrade` detects when generated files are out of date and offers to regenerate them; exits non-zero in CI mode when files differ.
+  5. `argus init` on a project with `.cursor/` or `.github/copilot-instructions.md` present automatically pre-selects those platforms in the scaffolded `.argus.yml`.
+**Plans**: TBD
+
+---
+
+## Progress
+
+**Execution Order:**
+Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
+
+| Phase | Milestone | Plans Complete | Status | Completed |
+|-------|-----------|----------------|--------|-----------|
+| 1–17. Foundation | v1.0 | — | Complete | 2026-06-15 |
+| 18. Gemini CLI Adapter | v1.1 | 0/TBD | Not started | - |
+| 19. Promoted Process Packs | v1.1 | 0/TBD | Not started | - |
+| 20. Security Pack | v1.1 | 0/TBD | Not started | - |
+| 21. Python & TypeScript Language Packs | v1.1 | 0/TBD | Not started | - |
+| 22. Go, Java & Kotlin Language Packs | v1.1 | 0/TBD | Not started | - |
+| 23. Python & JavaScript Framework Packs | v1.1 | 0/TBD | Not started | - |
+| 24. Java Framework Packs & CLI Improvements | v1.1 | 0/TBD | Not started | - |

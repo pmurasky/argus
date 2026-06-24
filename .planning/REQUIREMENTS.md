@@ -78,29 +78,29 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PLT-01      | TBD   | Pending |
-| PACK-01     | TBD   | Pending |
-| PACK-02     | TBD   | Pending |
-| PACK-03     | TBD   | Pending |
-| PACK-04     | TBD   | Pending |
-| LANG-01     | TBD   | Pending |
-| LANG-02     | TBD   | Pending |
-| LANG-03     | TBD   | Pending |
-| LANG-04     | TBD   | Pending |
-| LANG-05     | TBD   | Pending |
-| FWRK-01     | TBD   | Pending |
-| FWRK-02     | TBD   | Pending |
-| FWRK-03     | TBD   | Pending |
-| FWRK-04     | TBD   | Pending |
-| CLI-01      | TBD   | Pending |
-| CLI-02      | TBD   | Pending |
-| CLI-03      | TBD   | Pending |
+| PLT-01      | Phase 18 | Pending |
+| PACK-02     | Phase 19 | Pending |
+| PACK-03     | Phase 19 | Pending |
+| PACK-04     | Phase 19 | Pending |
+| PACK-01     | Phase 20 | Pending |
+| LANG-01     | Phase 21 | Pending |
+| LANG-02     | Phase 21 | Pending |
+| LANG-03     | Phase 22 | Pending |
+| LANG-04     | Phase 22 | Pending |
+| LANG-05     | Phase 22 | Pending |
+| FWRK-01     | Phase 23 | Pending |
+| FWRK-02     | Phase 23 | Pending |
+| FWRK-03     | Phase 24 | Pending |
+| FWRK-04     | Phase 24 | Pending |
+| CLI-01      | Phase 24 | Pending |
+| CLI-02      | Phase 24 | Pending |
+| CLI-03      | Phase 24 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 17 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 17 ⚠️
+- Mapped to phases: 17
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-06-23*
-*Last updated: 2026-06-23 — initial definition*
+*Last updated: 2026-06-23 — traceability mapped to phases 18–24*
