@@ -30,7 +30,7 @@ One command, one config, all AI coding platforms — engineering discipline inje
 
 <!-- Current milestone scope — v1.1 -->
 
-(Defined during milestone v1.1 planning)
+- PLT-01: User can generate GEMINI.md for Gemini CLI by adding `gemini` to `.argus.yml` platforms — Validated in Phase 18: Gemini CLI Adapter
 
 ### Out of Scope
 
@@ -43,7 +43,7 @@ One command, one config, all AI coding platforms — engineering discipline inje
 ## Context
 
 - **Ecosystem shift (2026):** AGENTS.md is now stewarded by the Linux Foundation, read natively by 28+ tools and in 60,000+ repos. AGENTS.md has become the primary cross-tool standard.
-- **Platform gap:** Windsurf (`.windsurf/rules/*.md`), Gemini CLI (`GEMINI.md`), Zed (reads AGENTS.md natively), Aider, and JetBrains Junie are not yet supported.
+- **Platform gap:** Windsurf (`.windsurf/rules/*.md`), Zed (reads AGENTS.md natively), Aider, and JetBrains Junie are not yet supported. Gemini CLI (`GEMINI.md`) added in Phase 18.
 - **Pack gap:** `awesome-cursorrules` has 163+ community rules. Argus has 5 process packs. Language/framework/security packs are the biggest unmet demand.
 - **Skills.sh (Jan 2026):** npm-style skill package manager working across Claude Code, Codex CLI, Cursor — potential distribution channel for packs.
 - **Architecture:** Clean SOLID design. New platform = one adapter file, no existing code changes. New pack = one new directory.
@@ -69,4 +69,4 @@ One command, one config, all AI coding platforms — engineering discipline inje
 | hatchling build backend | Modern, fast, zero config | ✓ Good |
 
 ---
-*Last updated: 2026-06-23 — bootstrapped for milestone v1.1 planning*
+*Last updated: 2026-06-24 — Phase 18 complete (Gemini CLI Adapter); 5 adapters now supported*
