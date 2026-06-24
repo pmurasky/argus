@@ -25,7 +25,7 @@ and a smarter CLI — making Argus useful for any language or framework team.
 
 #### Phase 18: Gemini CLI Adapter
 
-- [ ] **Phase 18: Gemini CLI Adapter** - Add `gemini` as a fifth supported platform
+- [x] **Phase 18: Gemini CLI Adapter** - Add `gemini` as a fifth supported platform (completed 2026-06-24)
 
 #### Phase 19: Promoted Process Packs
 
@@ -145,7 +145,7 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1–17. Foundation | v1.0 | — | Complete | 2026-06-15 |
-| 18. Gemini CLI Adapter | 1/2 | In Progress|  | - |
+| 18. Gemini CLI Adapter | 2/2 | Complete   | 2026-06-24 | - |
 | 19. Promoted Process Packs | v1.1 | 0/TBD | Not started | - |
 | 20. Security Pack | v1.1 | 0/TBD | Not started | - |
 | 21. Python & TypeScript Language Packs | v1.1 | 0/TBD | Not started | - |
