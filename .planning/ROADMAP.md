@@ -64,7 +64,10 @@ and a smarter CLI — making Argus useful for any language or framework team.
   2. `argus platforms list` includes `gemini` in its output.
   3. `GEMINI.md` content matches the pack rules configured — identical in substance to the claude adapter output for the same pack set.
   4. No existing adapter or test is modified to add this platform (adapter is a single new file).
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 18-01-PLAN.md — TDD GeminiAdapter: failing tests then implement argus/adapters/gemini.py (AGENTS.md + GEMINI.md)
+- [ ] 18-02-PLAN.md — Register entry point in pyproject.toml, add gemini to DEFAULT_PLATFORMS, reinstall, integration test
 
 ### Phase 19: Promoted Process Packs
 **Goal**: The `type-safety`, `error-handling`, and `documentation-standards` packs are available as built-in Argus packs, promoting content already proven in `.claude/rules/`.
@@ -142,7 +145,7 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1–17. Foundation | v1.0 | — | Complete | 2026-06-15 |
-| 18. Gemini CLI Adapter | v1.1 | 0/TBD | Not started | - |
+| 18. Gemini CLI Adapter | v1.1 | 0/2 | Planned | - |
 | 19. Promoted Process Packs | v1.1 | 0/TBD | Not started | - |
 | 20. Security Pack | v1.1 | 0/TBD | Not started | - |
 | 21. Python & TypeScript Language Packs | v1.1 | 0/TBD | Not started | - |
