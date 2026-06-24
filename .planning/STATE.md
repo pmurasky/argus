@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Pack Expansion
-status: unknown
-stopped_at: Phase 19 context gathered
-last_updated: "2026-06-24T01:27:38.690Z"
+status: executing
+stopped_at: "Completed 19-01-PLAN.md"
+last_updated: "2026-06-24T01:48:39Z"
 progress:
   total_phases: 7
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 5
+  completed_plans: 3
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-06-23)
 
 **Core value:** One command, one config, all AI coding platforms — engineering discipline injected everywhere agents run.
-**Current focus:** Phase 18 — Gemini CLI Adapter
+**Current focus:** Phase 19 — promoted-process-packs
 
 ## Current Position
 
-Phase: 18 (Gemini CLI Adapter) — EXECUTING
-Plan: 2 of 2
+Phase: 19 (promoted-process-packs) — EXECUTING
+Plan: 2 of 3
 
 ## Performance Metrics
 
@@ -59,6 +59,8 @@ Recent decisions affecting current work:
 - 18-01: No existing file modified — GeminiAdapter is a single new file per phase hard constraint
 - [Phase 18-gemini-cli-adapter]: 18-02: GEMINI_CONFIG local constant used in test to isolate from FULL_CONFIG shared by other integration tests
 - [Phase 18-gemini-cli-adapter]: 18-02: uv pip install -e . used for reinstall (project uses uv toolchain, pip not present in .venv)
+- [Phase 19-promoted-process-packs]: 19-01: TYPE_SAFETY_CONFIG constant used as isolated config (not added to FULL_CONFIG) — mirrors GEMINI_CONFIG precedent
+- [Phase 19-promoted-process-packs]: 19-01: mypy . chosen as generic replacement for mypy argus/ in type-safety pack content
 
 ### Pending Todos
 
@@ -71,6 +73,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-24T01:27:38.687Z
-Stopped at: Phase 19 context gathered
-Resume file: .planning/phases/19-promoted-process-packs/19-CONTEXT.md
+Last session: 2026-06-24T01:48:39Z
+Stopped at: Completed 19-01-PLAN.md
+Resume file: .planning/phases/19-promoted-process-packs/19-02-PLAN.md

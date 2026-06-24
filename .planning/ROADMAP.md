@@ -150,7 +150,7 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 |-------|-----------|----------------|--------|-----------|
 | 1–17. Foundation | v1.0 | — | Complete | 2026-06-15 |
 | 18. Gemini CLI Adapter | 2/2 | Complete    | 2026-06-24 | - |
-| 19. Promoted Process Packs | v1.1 | 0/3 | Planned | - |
+| 19. Promoted Process Packs | 1/3 | In Progress|  | - |
 | 20. Security Pack | v1.1 | 0/TBD | Not started | - |
 | 21. Python & TypeScript Language Packs | v1.1 | 0/TBD | Not started | - |
 | 22. Go, Java & Kotlin Language Packs | v1.1 | 0/TBD | Not started | - |
