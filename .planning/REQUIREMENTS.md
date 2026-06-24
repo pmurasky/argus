@@ -8,7 +8,7 @@
 
 ### Platform Adapters
 
-- [ ] **PLT-01**: User can generate `GEMINI.md` for Gemini CLI by adding `gemini` to `.argus.yml` platforms
+- [x] **PLT-01**: User can generate `GEMINI.md` for Gemini CLI by adding `gemini` to `.argus.yml` platforms
 
 ### Process Packs
 
@@ -78,7 +78,7 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PLT-01      | Phase 18 | Pending |
+| PLT-01      | Phase 18 | Complete |
 | PACK-02     | Phase 19 | Pending |
 | PACK-03     | Phase 19 | Pending |
 | PACK-04     | Phase 19 | Pending |

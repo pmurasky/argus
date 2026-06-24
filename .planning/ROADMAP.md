@@ -145,7 +145,7 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1–17. Foundation | v1.0 | — | Complete | 2026-06-15 |
-| 18. Gemini CLI Adapter | v1.1 | 0/2 | Planned | - |
+| 18. Gemini CLI Adapter | 1/2 | In Progress|  | - |
 | 19. Promoted Process Packs | v1.1 | 0/TBD | Not started | - |
 | 20. Security Pack | v1.1 | 0/TBD | Not started | - |
 | 21. Python & TypeScript Language Packs | v1.1 | 0/TBD | Not started | - |
