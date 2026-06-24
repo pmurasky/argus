@@ -170,3 +170,33 @@ def test_error_handling_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "system boundaries" in (tmp_path / ".claude/rules/error-handling.md").read_text()
+
+
+DOCUMENTATION_STANDARDS_CONFIG = """\
+packs:
+  - documentation-standards
+platforms:
+  - claude
+"""
+
+
+def test_documentation_standards_pack_appears_in_packs_list():
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "documentation-standards" in result.output
+
+
+def test_documentation_standards_pack_show_renders_content():
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "documentation-standards"])
+    assert result.exit_code == 0
+    assert "imperative mood" in result.output
+
+
+def test_documentation_standards_pack_generate_injects_content(tmp_path):
+    (tmp_path / ".argus.yml").write_text(DOCUMENTATION_STANDARDS_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "imperative mood" in (tmp_path / ".claude/rules/documentation-standards.md").read_text()
