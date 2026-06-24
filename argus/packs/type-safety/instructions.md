@@ -2,7 +2,7 @@
 
 ## Core Rule
 Every function and method must have fully annotated parameters and return type.
-Run `mypy argus/` before committing — it must exit 0.
+Run `mypy .` (or `mypy <your-project>/`) before committing — it must exit 0.
 
 ## Annotation Requirements
 - All parameters annotated — no bare untyped arguments
