@@ -93,7 +93,9 @@ Plans:
   1. User adds `security` to `.argus.yml` packs and generated files contain OWASP Top 10 guidance and input validation rules.
   2. `argus packs show security` displays the full security pack content.
   3. Security rules are specific enough to guide an AI agent (not generic platitudes — concrete rule per OWASP category).
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 20-01-PLAN.md — TDD security pack: 3 failing integration tests, then author OWASP pack files (pack.yml, instructions.md, checklist.md, examples.md)
 
 ### Phase 21: Python & TypeScript Language Packs
 **Goal**: Users working in Python or TypeScript can apply language-specific packs that inject idiomatic style, type discipline, and ecosystem conventions into agent instruction files.
@@ -151,7 +153,7 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 | 1–17. Foundation | v1.0 | — | Complete | 2026-06-15 |
 | 18. Gemini CLI Adapter | 2/2 | Complete    | 2026-06-24 | - |
 | 19. Promoted Process Packs | 3/3 | Complete    | 2026-06-24 | - |
-| 20. Security Pack | v1.1 | 0/TBD | Not started | - |
+| 20. Security Pack | v1.1 | 0/1 | Not started | - |
 | 21. Python & TypeScript Language Packs | v1.1 | 0/TBD | Not started | - |
 | 22. Go, Java & Kotlin Language Packs | v1.1 | 0/TBD | Not started | - |
 | 23. Python & JavaScript Framework Packs | v1.1 | 0/TBD | Not started | - |
