@@ -23,7 +23,7 @@
 - [x] **LANG-02**: User can apply `typescript` pack for strict mode, interface vs type, generics, and no-any rules
 - [x] **LANG-03**: User can apply `go` pack for Go error handling, interface design, goroutine, and package naming conventions
 - [x] **LANG-04**: User can apply `java` pack for Java conventions, OOP patterns, and JVM best practices
-- [ ] **LANG-05**: User can apply `kotlin` pack for Kotlin idioms, null safety, coroutines, and extension function patterns
+- [x] **LANG-05**: User can apply `kotlin` pack for Kotlin idioms, null safety, coroutines, and extension function patterns
 
 ### Framework Packs
 
@@ -87,7 +87,7 @@
 | LANG-02     | Phase 21 | Complete |
 | LANG-03     | Phase 22 | Complete |
 | LANG-04     | Phase 22 | Complete |
-| LANG-05     | Phase 22 | Pending |
+| LANG-05     | Phase 22 | Complete |
 | FWRK-01     | Phase 23 | Pending |
 | FWRK-02     | Phase 23 | Pending |
 | FWRK-03     | Phase 24 | Pending |

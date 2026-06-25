@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Pack Expansion
 status: unknown
-stopped_at: Completed 22-02-PLAN.md (java language pack)
-last_updated: "2026-06-25T02:26:31.345Z"
+stopped_at: Completed 22-03-PLAN.md (kotlin language pack)
+last_updated: "2026-06-25T02:30:25.020Z"
 progress:
   total_phases: 7
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 11
-  completed_plans: 10
+  completed_plans: 11
 ---
 
 # Project State
@@ -51,6 +51,7 @@ Plan: 1 of 3
 | Phase 21-python-typescript-language-packs P02 | 5 | 2 tasks | 5 files |
 | Phase 22-go-java-kotlin-language-packs P01 | 2 | 2 tasks | 5 files |
 | Phase 22 P02 | 2 min | 2 tasks | 5 files |
+| Phase 22-go-java-kotlin-language-packs P03 | 2 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,9 @@ Recent decisions affecting current work:
 - [Phase 22]: Optional.orElseThrow chosen as key test phrase for java pack — lives in instructions.md Null Discipline section, stable and unique
 - [Phase 22]: JAVA_CONFIG isolation constant follows GO_CONFIG and prior pack precedents
 - [Phase 22]: Java pack is framework-agnostic — FORBIDDEN: Spring, Jakarta EE, Quarkus, Hibernate
+- [Phase 22]: requireNotNull chosen as key test phrase for kotlin pack — lives in instructions.md Null Safety section, stable and unique
+- [Phase 22]: KOTLIN_CONFIG isolation constant follows GO_CONFIG and JAVA_CONFIG precedent from Plans 22-01 and 22-02
+- [Phase 22]: Kotlin pack is framework-agnostic — FORBIDDEN: Ktor, Android, Compose, Jetpack (belong in Phase 23 framework packs)
 
 ### Pending Todos
 
@@ -98,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-25T02:26:31.342Z
-Stopped at: Completed 22-02-PLAN.md (java language pack)
+Last session: 2026-06-25T02:30:25.018Z
+Stopped at: Completed 22-03-PLAN.md (kotlin language pack)
 Resume file: None
