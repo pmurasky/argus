@@ -233,3 +233,36 @@ def test_security_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "parameterized" in (tmp_path / ".claude/rules/security.md").read_text()
+
+
+PYTHON_CONFIG = """\
+packs:
+  - python
+platforms:
+  - claude
+"""
+
+
+def test_python_pack_appears_in_packs_list():
+    """Given packs list is invoked, python appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "python" in result.output
+
+
+def test_python_pack_show_renders_content():
+    """Given packs show python is invoked, pathlib appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "python"])
+    assert result.exit_code == 0
+    assert "pathlib" in result.output
+
+
+def test_python_pack_generate_injects_content(tmp_path):
+    """Given a python+claude config, generate writes content to .claude/rules/python.md."""
+    (tmp_path / ".argus.yml").write_text(PYTHON_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "pathlib" in (tmp_path / ".claude/rules/python.md").read_text()
