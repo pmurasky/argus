@@ -1,0 +1,5 @@
+name: go
+description: Go error handling, interface design, goroutine discipline, and package naming
+category: language
+requires: []
+platforms: [all]
