@@ -34,6 +34,7 @@ One command, one config, all AI coding platforms — engineering discipline inje
 - PACK-02: type-safety pack discoverable, renderable, injectable, no Argus-specific paths — Validated in Phase 19: Promoted Process Packs
 - PACK-03: error-handling pack discoverable, renderable, injectable, no Argus-specific class names — Validated in Phase 19: Promoted Process Packs
 - PACK-04: documentation-standards pack discoverable, renderable, injectable, no Argus-specific names — Validated in Phase 19: Promoted Process Packs
+- PACK-01: security pack discoverable, renderable, injectable — OWASP Top 10 (2021) categories A01/A02/A03/A04/A07/A08 + Input Validation — Validated in Phase 20: Security Pack
 
 ### Out of Scope
 
@@ -50,7 +51,7 @@ One command, one config, all AI coding platforms — engineering discipline inje
 - **Pack gap:** `awesome-cursorrules` has 163+ community rules. Argus has 5 process packs. Language/framework/security packs are the biggest unmet demand.
 - **Skills.sh (Jan 2026):** npm-style skill package manager working across Claude Code, Codex CLI, Cursor — potential distribution channel for packs.
 - **Architecture:** Clean SOLID design. New platform = one adapter file, no existing code changes. New pack = one new directory.
-- **Test coverage:** 148 tests pass; coverage at 94.88% (above 80% threshold).
+- **Test coverage:** 151 tests pass; coverage at 94.88% (above 80% threshold).
 - **Version:** 0.1.1. PyPI CI workflow wired (tag-triggered publish).
 - **Always run tests with `.venv/bin/pytest`** — system python3 doesn't have argus-standards installed.
 
@@ -72,4 +73,4 @@ One command, one config, all AI coding platforms — engineering discipline inje
 | hatchling build backend | Modern, fast, zero config | ✓ Good |
 
 ---
-*Last updated: 2026-06-24 — Phase 19 complete (Promoted Process Packs); type-safety, error-handling, documentation-standards packs now general-purpose*
+*Last updated: 2026-06-24 — Phase 20 complete (Security Pack); OWASP-aligned security pack added with 151 tests passing*
