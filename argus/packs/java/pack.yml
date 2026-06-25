@@ -1,0 +1,5 @@
+name: java
+description: Modern Java types, null discipline, OOP patterns, and exception handling
+category: language
+requires: []
+platforms: [all]
