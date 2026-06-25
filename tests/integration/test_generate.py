@@ -365,3 +365,36 @@ def test_java_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "Optional.orElseThrow" in (tmp_path / ".claude/rules/java.md").read_text()
+
+
+KOTLIN_CONFIG = """\
+packs:
+  - kotlin
+platforms:
+  - claude
+"""
+
+
+def test_kotlin_pack_appears_in_packs_list():
+    """Given packs list is invoked, kotlin appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "kotlin" in result.output
+
+
+def test_kotlin_pack_show_renders_content():
+    """Given packs show kotlin is invoked, requireNotNull appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "kotlin"])
+    assert result.exit_code == 0
+    assert "requireNotNull" in result.output
+
+
+def test_kotlin_pack_generate_injects_content(tmp_path):
+    """Given a kotlin+claude config, generate writes content to .claude/rules/kotlin.md."""
+    (tmp_path / ".argus.yml").write_text(KOTLIN_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "requireNotNull" in (tmp_path / ".claude/rules/kotlin.md").read_text()
