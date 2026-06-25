@@ -120,7 +120,11 @@ Plans:
   2. User adds `java` pack and generated files contain Java OOP conventions, common patterns, and JVM best practices.
   3. User adds `kotlin` pack and generated files contain null safety idioms, coroutine patterns, and extension function guidance.
   4. All three packs appear in `argus packs list` and respond to `argus packs show <name>`.
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 22-01-PLAN.md — TDD go pack: 3 failing integration tests, then author pack files (error handling, interfaces/composition, goroutines, package naming; framework-agnostic)
+- [ ] 22-02-PLAN.md — TDD java pack: 3 failing integration tests, then author pack files (modern Java 17+ types, null discipline, OOP, exception handling; framework-agnostic)
+- [ ] 22-03-PLAN.md — TDD kotlin pack: 3 failing integration tests, then author pack files (null safety, idiomatic Kotlin, coroutines, Kotlin-over-Java idioms; framework-agnostic)
 
 ### Phase 23: Python & JavaScript Framework Packs
 **Goal**: Users building FastAPI APIs or Next.js applications can apply framework packs that give AI agents precise, actionable rules for those ecosystems.
@@ -158,6 +162,6 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 | 19. Promoted Process Packs | 3/3 | Complete    | 2026-06-24 | - |
 | 20. Security Pack | 1/1 | Complete    | 2026-06-25 | - |
 | 21. Python & TypeScript Language Packs | 2/2 | Complete    | 2026-06-25 | - |
-| 22. Go, Java & Kotlin Language Packs | v1.1 | 0/TBD | Not started | - |
+| 22. Go, Java & Kotlin Language Packs | v1.1 | 0/3 | Planned | - |
 | 23. Python & JavaScript Framework Packs | v1.1 | 0/TBD | Not started | - |
 | 24. Java Framework Packs & CLI Improvements | v1.1 | 0/TBD | Not started | - |
