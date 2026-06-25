@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Pack Expansion
 status: unknown
-stopped_at: Phase 20 context gathered
-last_updated: "2026-06-24T02:32:13.937Z"
+stopped_at: Completed 20-01-PLAN.md
+last_updated: "2026-06-25T00:51:15.619Z"
 progress:
   total_phases: 7
-  completed_phases: 2
-  total_plans: 5
-  completed_plans: 5
+  completed_phases: 3
+  total_plans: 6
+  completed_plans: 6
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-06-23)
 
 **Core value:** One command, one config, all AI coding platforms — engineering discipline injected everywhere agents run.
-**Current focus:** Phase 19 — promoted-process-packs
+**Current focus:** Phase 20 — security-pack
 
 ## Current Position
 
-Phase: 19 (promoted-process-packs) — EXECUTING
-Plan: 3 of 3
+Phase: 20 (security-pack) — EXECUTING
+Plan: 1 of 1
 
 ## Performance Metrics
 
@@ -46,6 +46,7 @@ Plan: 3 of 3
 | Phase 18-gemini-cli-adapter P02 | 2 | 2 tasks | 3 files |
 | Phase 19 P02 | 1 min | 2 tasks | 4 files |
 | Phase 19 P03 | 5 | 2 tasks | 2 files |
+| Phase 20-security-pack P01 | 5 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -67,6 +68,8 @@ Recent decisions affecting current work:
 - [Phase 19]: 19-02: 'system boundaries' chosen as key phrase for tests (survives generalization)
 - [Phase 19]: 'imperative mood' chosen as key phrase for documentation-standards tests — lives in instructions.md, not examples.md, so survives Task 2 edit
 - [Phase 19]: DOCUMENTATION_STANDARDS_CONFIG follows isolation pattern from Plans 01 and 02
+- [Phase 20-security-pack]: parameterized chosen as key test phrase for security pack — lives in instructions.md (A03 Injection), survives future content edits
+- [Phase 20-security-pack]: SECURITY_CONFIG isolation constant follows TYPE_SAFETY_CONFIG and prior pack precedents
 
 ### Pending Todos
 
@@ -79,6 +82,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-24T02:32:13.934Z
-Stopped at: Phase 20 context gathered
-Resume file: .planning/phases/20-security-pack/20-CONTEXT.md
+Last session: 2026-06-25T00:51:15.617Z
+Stopped at: Completed 20-01-PLAN.md
+Resume file: None
