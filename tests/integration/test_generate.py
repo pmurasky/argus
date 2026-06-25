@@ -332,3 +332,36 @@ def test_go_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "errors.Is" in (tmp_path / ".claude/rules/go.md").read_text()
+
+
+JAVA_CONFIG = """\
+packs:
+  - java
+platforms:
+  - claude
+"""
+
+
+def test_java_pack_appears_in_packs_list():
+    """Given packs list is invoked, java appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "java" in result.output
+
+
+def test_java_pack_show_renders_content():
+    """Given packs show java is invoked, Optional.orElseThrow appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "java"])
+    assert result.exit_code == 0
+    assert "Optional.orElseThrow" in result.output
+
+
+def test_java_pack_generate_injects_content(tmp_path):
+    """Given a java+claude config, generate writes content to .claude/rules/java.md."""
+    (tmp_path / ".argus.yml").write_text(JAVA_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "Optional.orElseThrow" in (tmp_path / ".claude/rules/java.md").read_text()
