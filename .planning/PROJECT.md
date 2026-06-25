@@ -37,6 +37,9 @@ One command, one config, all AI coding platforms — engineering discipline inje
 - PACK-01: security pack discoverable, renderable, injectable — OWASP Top 10 (2021) categories A01/A02/A03/A04/A07/A08 + Input Validation — Validated in Phase 20: Security Pack
 - LANG-01: python language pack discoverable, renderable, injectable — pathlib idioms, zero mypy overlap — Validated in Phase 21: Python & TypeScript Language Packs
 - LANG-02: typescript language pack discoverable, renderable, injectable — strict mode, noImplicitAny, no framework coupling — Validated in Phase 21: Python & TypeScript Language Packs
+- LANG-03: go language pack discoverable, renderable, injectable — errors.Is/As, interface composition, goroutines, package naming — Validated in Phase 22: Go, Java & Kotlin Language Packs
+- LANG-04: java language pack discoverable, renderable, injectable — modern types, Optional.orElseThrow, OOP patterns, exceptions — Validated in Phase 22: Go, Java & Kotlin Language Packs
+- LANG-05: kotlin language pack discoverable, renderable, injectable — requireNotNull, coroutines, idiomatic Kotlin, K-over-Java idioms — Validated in Phase 22: Go, Java & Kotlin Language Packs
 
 ### Out of Scope
 
@@ -53,7 +56,7 @@ One command, one config, all AI coding platforms — engineering discipline inje
 - **Pack gap:** `awesome-cursorrules` has 163+ community rules. Argus has 5 process packs. Language/framework/security packs are the biggest unmet demand.
 - **Skills.sh (Jan 2026):** npm-style skill package manager working across Claude Code, Codex CLI, Cursor — potential distribution channel for packs.
 - **Architecture:** Clean SOLID design. New platform = one adapter file, no existing code changes. New pack = one new directory.
-- **Test coverage:** 151 tests pass; coverage at 94.88% (above 80% threshold).
+- **Test coverage:** 166 tests pass; coverage at 94.88% (above 80% threshold).
 - **Version:** 0.1.1. PyPI CI workflow wired (tag-triggered publish).
 - **Always run tests with `.venv/bin/pytest`** — system python3 doesn't have argus-standards installed.
 
@@ -75,4 +78,4 @@ One command, one config, all AI coding platforms — engineering discipline inje
 | hatchling build backend | Modern, fast, zero config | ✓ Good |
 
 ---
-*Last updated: 2026-06-24 — Phase 21 complete (Python & TypeScript Language Packs); 157 tests passing at 94.88% coverage*
+*Last updated: 2026-06-24 — Phase 22 complete (Go, Java & Kotlin Language Packs); 166 tests passing at 94.88% coverage*
