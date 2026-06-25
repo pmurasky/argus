@@ -200,3 +200,36 @@ def test_documentation_standards_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "imperative mood" in (tmp_path / ".claude/rules/documentation-standards.md").read_text()
+
+
+SECURITY_CONFIG = """\
+packs:
+  - security
+platforms:
+  - claude
+"""
+
+
+def test_security_pack_appears_in_packs_list():
+    """Given packs list is invoked, security appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "security" in result.output
+
+
+def test_security_pack_show_renders_content():
+    """Given packs show security is invoked, parameterized appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "security"])
+    assert result.exit_code == 0
+    assert "parameterized" in result.output
+
+
+def test_security_pack_generate_injects_content(tmp_path):
+    """Given a security+claude config, generate writes content to .claude/rules/security.md."""
+    (tmp_path / ".argus.yml").write_text(SECURITY_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "parameterized" in (tmp_path / ".claude/rules/security.md").read_text()
