@@ -1,0 +1,5 @@
+name: typescript
+description: Strict mode, interface vs type, generics discipline, and no-any rules
+category: language
+requires: []
+platforms: [all]
