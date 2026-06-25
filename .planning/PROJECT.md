@@ -35,6 +35,8 @@ One command, one config, all AI coding platforms — engineering discipline inje
 - PACK-03: error-handling pack discoverable, renderable, injectable, no Argus-specific class names — Validated in Phase 19: Promoted Process Packs
 - PACK-04: documentation-standards pack discoverable, renderable, injectable, no Argus-specific names — Validated in Phase 19: Promoted Process Packs
 - PACK-01: security pack discoverable, renderable, injectable — OWASP Top 10 (2021) categories A01/A02/A03/A04/A07/A08 + Input Validation — Validated in Phase 20: Security Pack
+- LANG-01: python language pack discoverable, renderable, injectable — pathlib idioms, zero mypy overlap — Validated in Phase 21: Python & TypeScript Language Packs
+- LANG-02: typescript language pack discoverable, renderable, injectable — strict mode, noImplicitAny, no framework coupling — Validated in Phase 21: Python & TypeScript Language Packs
 
 ### Out of Scope
 
@@ -73,4 +75,4 @@ One command, one config, all AI coding platforms — engineering discipline inje
 | hatchling build backend | Modern, fast, zero config | ✓ Good |
 
 ---
-*Last updated: 2026-06-24 — Phase 20 complete (Security Pack); OWASP-aligned security pack added with 151 tests passing*
+*Last updated: 2026-06-24 — Phase 21 complete (Python & TypeScript Language Packs); 157 tests passing at 94.88% coverage*
