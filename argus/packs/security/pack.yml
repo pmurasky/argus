@@ -1,0 +1,5 @@
+name: security
+description: OWASP Top 10 coding rules — injection, cryptography, access control, and input validation
+category: quality
+requires: []
+platforms: [all]
