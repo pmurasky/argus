@@ -37,7 +37,7 @@ and a smarter CLI — making Argus useful for any language or framework team.
 
 #### Phase 21: Python & TypeScript Language Packs
 
-- [ ] **Phase 21: Python & TypeScript Language Packs** - Ship `python` and `typescript` language packs
+- [x] **Phase 21: Python & TypeScript Language Packs** - Ship `python` and `typescript` language packs (completed 2026-06-25)
 
 #### Phase 22: Go, Java & Kotlin Language Packs
 
@@ -157,7 +157,7 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 | 18. Gemini CLI Adapter | 2/2 | Complete    | 2026-06-24 | - |
 | 19. Promoted Process Packs | 3/3 | Complete    | 2026-06-24 | - |
 | 20. Security Pack | 1/1 | Complete    | 2026-06-25 | - |
-| 21. Python & TypeScript Language Packs | 1/2 | In Progress|  | - |
+| 21. Python & TypeScript Language Packs | 2/2 | Complete   | 2026-06-25 | - |
 | 22. Go, Java & Kotlin Language Packs | v1.1 | 0/TBD | Not started | - |
 | 23. Python & JavaScript Framework Packs | v1.1 | 0/TBD | Not started | - |
 | 24. Java Framework Packs & CLI Improvements | v1.1 | 0/TBD | Not started | - |

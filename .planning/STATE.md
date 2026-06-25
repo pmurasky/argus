@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Pack Expansion
-status: executing
-stopped_at: "Completed 21-01-PLAN.md"
-last_updated: "2026-06-25T01:42:00Z"
+status: unknown
+stopped_at: Completed 21-02-PLAN.md (typescript language pack)
+last_updated: "2026-06-25T01:42:12.865Z"
 progress:
   total_phases: 7
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 8
-  completed_plans: 7
+  completed_plans: 8
 ---
 
 # Project State
@@ -48,6 +48,7 @@ Plan: 2 of 2
 | Phase 19 P03 | 5 | 2 tasks | 2 files |
 | Phase 20-security-pack P01 | 5 | 2 tasks | 5 files |
 | Phase 21-python-typescript-language-packs P01 | 5 min | 2 tasks | 5 files |
+| Phase 21-python-typescript-language-packs P02 | 5 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -74,6 +75,9 @@ Recent decisions affecting current work:
 - [Phase 21-python-typescript-language-packs]: pathlib chosen as key test phrase for python pack — lives in instructions.md (Idiomatic Python section), stable and unique
 - [Phase 21-python-typescript-language-packs]: PYTHON_CONFIG isolation constant follows TYPE_SAFETY_CONFIG and prior pack precedents
 - [Phase 21-python-typescript-language-packs]: Zero overlap with type-safety pack enforced — FORBIDDEN in python pack: mypy, Optional, type annotations
+- [Phase 21-python-typescript-language-packs]: noImplicitAny chosen as key test phrase for typescript pack — lives in instructions.md Strict Mode section, stable and unique
+- [Phase 21-python-typescript-language-packs]: TYPESCRIPT_CONFIG isolation constant follows TYPE_SAFETY_CONFIG and prior pack precedents
+- [Phase 21-python-typescript-language-packs]: TypeScript pack is framework-agnostic — FORBIDDEN: React, JSX, Next.js, Vue (belong in Phase 23)
 
 ### Pending Todos
 
@@ -86,6 +90,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-25T01:42:00Z
-Stopped at: Completed 21-01-PLAN.md (python language pack)
-Resume file: .planning/phases/21-python-typescript-language-packs/21-02-PLAN.md
+Last session: 2026-06-25T01:42:12.862Z
+Stopped at: Completed 21-02-PLAN.md (typescript language pack)
+Resume file: None
