@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Pack Expansion
-status: unknown
-stopped_at: Phase 21 context gathered
-last_updated: "2026-06-25T01:20:50.304Z"
+status: executing
+stopped_at: "Completed 21-01-PLAN.md"
+last_updated: "2026-06-25T01:42:00Z"
 progress:
   total_phases: 7
   completed_phases: 3
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 8
+  completed_plans: 7
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-06-23)
 
 **Core value:** One command, one config, all AI coding platforms — engineering discipline injected everywhere agents run.
-**Current focus:** Phase 20 — security-pack
+**Current focus:** Phase 21 — python-typescript-language-packs
 
 ## Current Position
 
-Phase: 20 (security-pack) — EXECUTING
-Plan: 1 of 1
+Phase: 21 (python-typescript-language-packs) — EXECUTING
+Plan: 2 of 2
 
 ## Performance Metrics
 
@@ -47,6 +47,7 @@ Plan: 1 of 1
 | Phase 19 P02 | 1 min | 2 tasks | 4 files |
 | Phase 19 P03 | 5 | 2 tasks | 2 files |
 | Phase 20-security-pack P01 | 5 | 2 tasks | 5 files |
+| Phase 21-python-typescript-language-packs P01 | 5 min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -70,6 +71,9 @@ Recent decisions affecting current work:
 - [Phase 19]: DOCUMENTATION_STANDARDS_CONFIG follows isolation pattern from Plans 01 and 02
 - [Phase 20-security-pack]: parameterized chosen as key test phrase for security pack — lives in instructions.md (A03 Injection), survives future content edits
 - [Phase 20-security-pack]: SECURITY_CONFIG isolation constant follows TYPE_SAFETY_CONFIG and prior pack precedents
+- [Phase 21-python-typescript-language-packs]: pathlib chosen as key test phrase for python pack — lives in instructions.md (Idiomatic Python section), stable and unique
+- [Phase 21-python-typescript-language-packs]: PYTHON_CONFIG isolation constant follows TYPE_SAFETY_CONFIG and prior pack precedents
+- [Phase 21-python-typescript-language-packs]: Zero overlap with type-safety pack enforced — FORBIDDEN in python pack: mypy, Optional, type annotations
 
 ### Pending Todos
 
@@ -82,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-25T01:20:50.301Z
-Stopped at: Phase 21 context gathered
-Resume file: .planning/phases/21-python-typescript-language-packs/21-CONTEXT.md
+Last session: 2026-06-25T01:42:00Z
+Stopped at: Completed 21-01-PLAN.md (python language pack)
+Resume file: .planning/phases/21-python-typescript-language-packs/21-02-PLAN.md
