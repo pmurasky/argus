@@ -299,3 +299,36 @@ def test_typescript_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "noImplicitAny" in (tmp_path / ".claude/rules/typescript.md").read_text()
+
+
+GO_CONFIG = """\
+packs:
+  - go
+platforms:
+  - claude
+"""
+
+
+def test_go_pack_appears_in_packs_list():
+    """Given packs list is invoked, go appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "go" in result.output
+
+
+def test_go_pack_show_renders_content():
+    """Given packs show go is invoked, errors.Is appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "go"])
+    assert result.exit_code == 0
+    assert "errors.Is" in result.output
+
+
+def test_go_pack_generate_injects_content(tmp_path):
+    """Given a go+claude config, generate writes content to .claude/rules/go.md."""
+    (tmp_path / ".argus.yml").write_text(GO_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "errors.Is" in (tmp_path / ".claude/rules/go.md").read_text()
