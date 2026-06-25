@@ -7,6 +7,7 @@
   "roadmapper_model": "opus",
   "commit_docs": true,
   "workflow": {
-    "research": true
+    "research": true,
+    "_auto_chain_active": false
   }
 }
