@@ -1,0 +1,5 @@
+name: kotlin
+description: Null safety, idiomatic Kotlin, coroutines, and Kotlin-over-Java idioms
+category: language
+requires: []
+platforms: [all]
