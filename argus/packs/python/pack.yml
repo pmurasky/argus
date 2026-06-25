@@ -1,0 +1,5 @@
+name: python
+description: PEP 8 style, idiomatic Python, dataclasses, and naming conventions
+category: language
+requires: []
+platforms: [all]
