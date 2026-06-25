@@ -106,7 +106,10 @@ Plans:
   2. User adds `typescript` pack and generated files contain strict mode mandate, interface vs type guidance, generics usage, and no-any rules.
   3. Both packs appear in `argus packs list` under a recognizable language category.
   4. `argus packs show python` and `argus packs show typescript` each display their full content.
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 21-01-PLAN.md — TDD python pack: 3 failing integration tests, then author pack files (PEP 8, naming, idioms, dataclasses; zero type-safety overlap)
+- [ ] 21-02-PLAN.md — TDD typescript pack: 3 failing integration tests, then author pack files (strict mode, interface vs type, generics, no-any; framework-agnostic)
 
 ### Phase 22: Go, Java & Kotlin Language Packs
 **Goal**: Users working in Go, Java, or Kotlin can apply language-specific packs that codify the idioms and conventions most important for AI agents to follow in each ecosystem.
@@ -154,7 +157,7 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 | 18. Gemini CLI Adapter | 2/2 | Complete    | 2026-06-24 | - |
 | 19. Promoted Process Packs | 3/3 | Complete    | 2026-06-24 | - |
 | 20. Security Pack | 1/1 | Complete    | 2026-06-25 | - |
-| 21. Python & TypeScript Language Packs | v1.1 | 0/TBD | Not started | - |
+| 21. Python & TypeScript Language Packs | v1.1 | 0/2 | Not started | - |
 | 22. Go, Java & Kotlin Language Packs | v1.1 | 0/TBD | Not started | - |
 | 23. Python & JavaScript Framework Packs | v1.1 | 0/TBD | Not started | - |
 | 24. Java Framework Packs & CLI Improvements | v1.1 | 0/TBD | Not started | - |
