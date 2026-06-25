@@ -4,7 +4,7 @@ milestone: v1.1
 milestone_name: Pack Expansion
 status: unknown
 stopped_at: Completed 22-03-PLAN.md (kotlin language pack)
-last_updated: "2026-06-25T02:30:25.020Z"
+last_updated: "2026-06-25T02:33:02.494Z"
 progress:
   total_phases: 7
   completed_phases: 5
