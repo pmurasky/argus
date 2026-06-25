@@ -266,3 +266,36 @@ def test_python_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "pathlib" in (tmp_path / ".claude/rules/python.md").read_text()
+
+
+TYPESCRIPT_CONFIG = """\
+packs:
+  - typescript
+platforms:
+  - claude
+"""
+
+
+def test_typescript_pack_appears_in_packs_list():
+    """Given packs list is invoked, typescript appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "typescript" in result.output
+
+
+def test_typescript_pack_show_renders_content():
+    """Given packs show typescript is invoked, noImplicitAny appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "typescript"])
+    assert result.exit_code == 0
+    assert "noImplicitAny" in result.output
+
+
+def test_typescript_pack_generate_injects_content(tmp_path):
+    """Given a typescript+claude config, generate writes content to .claude/rules/typescript.md."""
+    (tmp_path / ".argus.yml").write_text(TYPESCRIPT_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "noImplicitAny" in (tmp_path / ".claude/rules/typescript.md").read_text()
