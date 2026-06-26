@@ -259,3 +259,66 @@ def test_upgrade_fails_gracefully_when_no_config(tmp_path):
     # Then
     assert result.exit_code == 1
     assert ".argus.yml not found" in result.output
+
+
+def test_init_detects_claude_platform(tmp_path):
+    # Given
+    (tmp_path / ".claude").mkdir()
+    runner = CliRunner()
+    # When
+    result = runner.invoke(main, ["init", "--project-root", str(tmp_path)])
+    content = (tmp_path / ".argus.yml").read_text()
+    # Then
+    assert result.exit_code == 0
+    assert "- claude" in content
+    assert "# - cursor" in content
+
+
+def test_init_detects_cursor_platform(tmp_path):
+    # Given
+    (tmp_path / ".cursor").mkdir()
+    runner = CliRunner()
+    # When
+    result = runner.invoke(main, ["init", "--project-root", str(tmp_path)])
+    content = (tmp_path / ".argus.yml").read_text()
+    # Then
+    assert result.exit_code == 0
+    assert "- cursor" in content
+
+
+def test_init_detects_copilot_platform(tmp_path):
+    # Given
+    (tmp_path / ".github").mkdir()
+    (tmp_path / ".github" / "copilot-instructions.md").write_text("# copilot")
+    runner = CliRunner()
+    # When
+    result = runner.invoke(main, ["init", "--project-root", str(tmp_path)])
+    content = (tmp_path / ".argus.yml").read_text()
+    # Then
+    assert result.exit_code == 0
+    assert "- copilot" in content
+
+
+def test_init_comments_undetected_platforms(tmp_path):
+    # Given
+    (tmp_path / ".claude").mkdir()
+    runner = CliRunner()
+    # When
+    result = runner.invoke(main, ["init", "--project-root", str(tmp_path)])
+    content = (tmp_path / ".argus.yml").read_text()
+    # Then
+    assert "# - gemini" in content
+
+
+def test_init_fallback_when_no_platforms_detected(tmp_path):
+    # Given — empty directory, no markers
+    runner = CliRunner()
+    # When
+    result = runner.invoke(main, ["init", "--project-root", str(tmp_path)])
+    content = (tmp_path / ".argus.yml").read_text()
+    # Then
+    assert result.exit_code == 0
+    assert "# -" not in content
+    from argus.cli import DEFAULT_PLATFORMS
+    for platform in DEFAULT_PLATFORMS:
+        assert f"- {platform}" in content
