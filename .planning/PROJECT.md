@@ -42,6 +42,11 @@ One command, one config, all AI coding platforms — engineering discipline inje
 - LANG-05: kotlin language pack discoverable, renderable, injectable — requireNotNull, coroutines, idiomatic Kotlin, K-over-Java idioms — Validated in Phase 22: Go, Java & Kotlin Language Packs
 - FWRK-01: fastapi framework pack discoverable, renderable, injectable — async-first, Pydantic v2, DI patterns, APIRouter organization — Validated in Phase 23: Python & JavaScript Framework Packs
 - FWRK-02: nextjs framework pack discoverable, renderable, injectable — App Router, server/client components, hooks discipline, TS integration — Validated in Phase 23: Python & JavaScript Framework Packs
+- FWRK-03: spring framework pack discoverable, renderable, injectable — Spring Boot 4.x / Jakarta EE 11, IoC/JPA/REST/test-slices, zero javax imports — Validated in Phase 24: Java Framework Packs & CLI Improvements
+- FWRK-04: mockito framework pack discoverable, renderable, injectable — Mockito 5.x mock mechanics, @Mock/@Spy/ArgumentCaptor/BDDMockito, no Spring overlap — Validated in Phase 24: Java Framework Packs & CLI Improvements
+- CLI-02: `argus upgrade` detects drifted generated files, lists names, prompts interactively; exits non-zero in CI mode — Validated in Phase 24: Java Framework Packs & CLI Improvements
+- CLI-03: `argus init` detects installed platform markers and pre-selects active platforms; falls back to all-uncommented when none detected — Validated in Phase 24: Java Framework Packs & CLI Improvements
+- CLI-01: 80% unit test coverage maintained across all phase-24 changes (94.67% achieved) — Validated in Phase 24: Java Framework Packs & CLI Improvements
 
 ### Out of Scope
 
@@ -58,7 +63,7 @@ One command, one config, all AI coding platforms — engineering discipline inje
 - **Pack gap:** `awesome-cursorrules` has 163+ community rules. Argus has 5 process packs. Language/framework/security packs are the biggest unmet demand.
 - **Skills.sh (Jan 2026):** npm-style skill package manager working across Claude Code, Codex CLI, Cursor — potential distribution channel for packs.
 - **Architecture:** Clean SOLID design. New platform = one adapter file, no existing code changes. New pack = one new directory.
-- **Test coverage:** 172 tests pass; coverage at 94.88% (above 80% threshold).
+- **Test coverage:** 189 tests pass; coverage at 94.67% (above 80% threshold).
 - **Version:** 0.1.1. PyPI CI workflow wired (tag-triggered publish).
 - **Always run tests with `.venv/bin/pytest`** — system python3 doesn't have argus-standards installed.
 
@@ -80,4 +85,4 @@ One command, one config, all AI coding platforms — engineering discipline inje
 | hatchling build backend | Modern, fast, zero config | ✓ Good |
 
 ---
-*Last updated: 2026-06-26 — Phase 23 complete (FastAPI & Next.js Framework Packs); 172 tests passing at 94.88% coverage*
+*Last updated: 2026-06-26 — Phase 24 complete (Spring & Mockito packs + argus upgrade/init improvements); 189 tests passing at 94.67% coverage*
