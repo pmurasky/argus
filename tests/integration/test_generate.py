@@ -464,3 +464,36 @@ def test_nextjs_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "use client" in (tmp_path / ".claude/rules/nextjs.md").read_text()
+
+
+SPRING_CONFIG = """\
+packs:
+  - spring
+platforms:
+  - claude
+"""
+
+
+def test_spring_pack_appears_in_packs_list():
+    """Given packs list is invoked, spring appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "spring" in result.output
+
+
+def test_spring_pack_show_renders_content():
+    """Given packs show spring is invoked, @SpringBootTest appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "spring"])
+    assert result.exit_code == 0
+    assert "@SpringBootTest" in result.output
+
+
+def test_spring_pack_generate_injects_content(tmp_path):
+    """Given a spring+claude config, generate writes content to .claude/rules/spring.md."""
+    (tmp_path / ".argus.yml").write_text(SPRING_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "@SpringBootTest" in (tmp_path / ".claude/rules/spring.md").read_text()
