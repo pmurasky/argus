@@ -1,0 +1,5 @@
+name: mockito
+description: Mockito 5.x mock discipline — @Mock vs @Spy, argument captors, and verify patterns
+category: framework
+requires: [java]
+platforms: [all]
