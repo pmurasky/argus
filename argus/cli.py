@@ -1,12 +1,25 @@
+import os
 import sys
 from pathlib import Path
 
 import click
 import yaml
 
+from argus.adapters.base import GeneratedFile
 from argus.config import ArgusConfig
 from argus.generator import AdapterConflictError, AdapterRegistry, Generator, UnknownPlatformError
 from argus.loader import PackLoader, PackNotFoundError
+
+
+def _compute_changed_files(
+    files: list[GeneratedFile], project_root: Path
+) -> list[GeneratedFile]:
+    """Return files that would change if written to project_root."""
+    return [
+        f for f in files
+        if not (project_root / f.path).exists()
+        or (project_root / f.path).read_text() != f.content
+    ]
 
 
 @click.group()
@@ -46,11 +59,7 @@ def generate(dry_run: bool, check: bool, project_root: Path) -> None:
         return
 
     if check:
-        changed = [
-            f for f in files
-            if not (project_root / f.path).exists()
-            or (project_root / f.path).read_text() != f.content
-        ]
+        changed = _compute_changed_files(files, project_root)
         if changed:
             for f in changed:
                 click.echo(f"  would change: {f.path}", err=True)
@@ -84,6 +93,49 @@ def init(project_root: Path) -> None:
     config_path.write_text(yaml.dump(config, default_flow_style=False))
     click.echo(f"✓ Written: {config_path}")
     click.echo("Edit .argus.yml to select packs and platforms, then run: argus generate")
+
+
+@main.command()
+@click.option(
+    "--project-root",
+    default=".",
+    type=click.Path(path_type=Path),
+)
+def upgrade(project_root: Path) -> None:
+    """Detect out-of-date generated files and offer to regenerate."""
+    config_path = project_root / ".argus.yml"
+    if not config_path.exists():
+        click.echo(
+            f"✗ .argus.yml not found in {project_root}. Run `argus init` first.",
+            err=True,
+        )
+        sys.exit(1)
+
+    config = ArgusConfig.from_file(config_path)
+    try:
+        files = Generator().run(config, project_root)
+    except (PackNotFoundError, UnknownPlatformError, AdapterConflictError) as e:
+        click.echo(f"✗ {e}", err=True)
+        sys.exit(1)
+
+    changed = _compute_changed_files(files, project_root)
+
+    if not changed:
+        click.echo("✓ All generated files are up to date.")
+        return
+
+    for f in changed:
+        click.echo(f"  • {f.path}")
+
+    if os.environ.get("CI"):
+        sys.exit(1)
+
+    if click.confirm("Regenerate now?", default=False):
+        for f in changed:
+            target = project_root / f.path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(f.content)
+            click.echo(f"  ✓ {f.path}")
 
 
 @main.group()
