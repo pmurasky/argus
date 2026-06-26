@@ -171,4 +171,4 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 | 21. Python & TypeScript Language Packs | 2/2 | Complete    | 2026-06-25 | - |
 | 22. Go, Java & Kotlin Language Packs | 3/3 | Complete    | 2026-06-25 | - |
 | 23. Python & JavaScript Framework Packs | 2/2 | Complete    | 2026-06-26 | - |
-| 24. Java Framework Packs & CLI Improvements | 3/3 | Complete   | 2026-06-26 | - |
+| 24. Java Framework Packs & CLI Improvements | 3/3 | Complete    | 2026-06-26 | - |
