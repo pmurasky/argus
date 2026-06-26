@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Pack Expansion
 status: unknown
-stopped_at: Completed 24-01-PLAN.md
-last_updated: "2026-06-26T23:25:55.745Z"
+stopped_at: Completed 24-02-PLAN.md
+last_updated: "2026-06-26T23:28:54.029Z"
 progress:
   total_phases: 7
   completed_phases: 6
   total_plans: 16
-  completed_plans: 14
+  completed_plans: 15
 ---
 
 # Project State
@@ -55,6 +55,7 @@ Plan: 1 of 3
 | Phase 23 P01 | 5 | 2 tasks | 5 files |
 | Phase 23 P02 | 3 | 2 tasks | 5 files |
 | Phase 24-java-framework-packs-cli-improvements P01 | 1 | 2 tasks | 3 files |
+| Phase 24 P02 | 4 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -100,6 +101,9 @@ Recent decisions affecting current work:
 - [Phase 24-java-framework-packs-cli-improvements]: @SpringBootTest chosen as key test phrase for spring pack — lives in instructions.md Testing section, stable and unique
 - [Phase 24-java-framework-packs-cli-improvements]: SPRING_CONFIG isolation constant follows FASTAPI_CONFIG and prior pack precedents
 - [Phase 24-java-framework-packs-cli-improvements]: Spring pack: All content targets Spring Boot 4.x / Spring 7 (Jakarta EE 11) — no 2.x/3.x compatibility notes, zero java-pack overlap
+- [Phase 24]: ArgumentCaptor chosen as key test phrase for mockito pack — lives in instructions.md Argument Captors section, stable and unique
+- [Phase 24]: MOCKITO_CONFIG isolation constant follows SPRING_CONFIG and prior pack precedents
+- [Phase 24]: Mockito pack: mock-mechanics only — FORBIDDEN: @MockBean, @SpyBean (Spring), @RunWith (JUnit 4)
 
 ### Pending Todos
 
@@ -112,6 +116,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-26T23:25:55.743Z
-Stopped at: Completed 24-01-PLAN.md
+Last session: 2026-06-26T23:28:54.027Z
+Stopped at: Completed 24-02-PLAN.md
 Resume file: None

@@ -30,7 +30,7 @@
 - [x] **FWRK-01**: User can apply `fastapi` pack for dependency injection, async patterns, Pydantic model, and router organization rules
 - [x] **FWRK-02**: User can apply `nextjs` pack for App Router, server components, React hooks discipline, and TypeScript integration rules
 - [x] **FWRK-03**: User can apply `spring` pack for Spring/Spring Boot conventions, IoC container, JPA patterns, and REST API design
-- [ ] **FWRK-04**: User can apply `mockito` pack for Java mock discipline, `@Mock` vs `@Spy`, argument captors, and verify patterns
+- [x] **FWRK-04**: User can apply `mockito` pack for Java mock discipline, `@Mock` vs `@Spy`, argument captors, and verify patterns
 
 ### CLI & Core
 
@@ -91,7 +91,7 @@
 | FWRK-01     | Phase 23 | Complete |
 | FWRK-02     | Phase 23 | Complete |
 | FWRK-03     | Phase 24 | Complete |
-| FWRK-04     | Phase 24 | Pending |
+| FWRK-04     | Phase 24 | Complete |
 | CLI-01      | Phase 24 | Pending |
 | CLI-02      | Phase 24 | Pending |
 | CLI-03      | Phase 24 | Pending |
