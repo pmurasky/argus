@@ -1,0 +1,5 @@
+name: spring
+description: Spring Boot 4.x IoC container, Data JPA patterns, and REST API design
+category: framework
+requires: [java]
+platforms: [all]
