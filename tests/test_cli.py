@@ -166,3 +166,96 @@ def test_validate_fails_with_missing_config(tmp_path):
     runner = CliRunner()
     result = runner.invoke(main, ["validate", "--project-root", str(tmp_path)])
     assert result.exit_code == 1
+
+
+def test_upgrade_exits_zero_when_files_current(tmp_path):
+    # Given
+    _write_config(tmp_path)
+    existing_content = "# current content"
+    (tmp_path / "CLAUDE.md").write_text(existing_content)
+    output_file = GeneratedFile(path=Path("CLAUDE.md"), content=existing_content)
+    runner = CliRunner()
+    # When
+    with patch("argus.cli.Generator", _mock_generator([output_file])):
+        result = runner.invoke(main, ["upgrade", "--project-root", str(tmp_path)])
+    # Then
+    assert result.exit_code == 0
+    assert "up to date" in result.output
+
+
+def test_upgrade_lists_changed_file_names(tmp_path):
+    # Given
+    _write_config(tmp_path)
+    (tmp_path / "CLAUDE.md").write_text("# old content")
+    output_file = GeneratedFile(path=Path("CLAUDE.md"), content="# new content")
+    runner = CliRunner()
+    # When
+    with patch("argus.cli.Generator", _mock_generator([output_file])):
+        result = runner.invoke(main, ["upgrade", "--project-root", str(tmp_path)], input="n\n")
+    # Then
+    assert "CLAUDE.md" in result.output
+
+
+def test_upgrade_exits_nonzero_in_ci_when_files_differ(tmp_path):
+    # Given
+    _write_config(tmp_path)
+    (tmp_path / "CLAUDE.md").write_text("# old content")
+    output_file = GeneratedFile(path=Path("CLAUDE.md"), content="# new content")
+    runner = CliRunner()
+    # When
+    with patch("argus.cli.Generator", _mock_generator([output_file])):
+        result = runner.invoke(
+            main,
+            ["upgrade", "--project-root", str(tmp_path)],
+            env={"CI": "true"},
+        )
+    # Then
+    assert result.exit_code == 1
+
+
+def test_upgrade_prompts_and_writes_when_confirmed(tmp_path):
+    # Given
+    _write_config(tmp_path)
+    (tmp_path / "CLAUDE.md").write_text("# old content")
+    output_file = GeneratedFile(path=Path("CLAUDE.md"), content="# new content")
+    runner = CliRunner()
+    # When
+    with patch("argus.cli.Generator", _mock_generator([output_file])):
+        result = runner.invoke(
+            main,
+            ["upgrade", "--project-root", str(tmp_path)],
+            input="y\n",
+            env={},
+        )
+    # Then
+    assert result.exit_code == 0
+    assert (tmp_path / "CLAUDE.md").read_text() == "# new content"
+
+
+def test_upgrade_does_not_write_when_declined(tmp_path):
+    # Given
+    _write_config(tmp_path)
+    (tmp_path / "CLAUDE.md").write_text("# old content")
+    output_file = GeneratedFile(path=Path("CLAUDE.md"), content="# new content")
+    runner = CliRunner()
+    # When
+    with patch("argus.cli.Generator", _mock_generator([output_file])):
+        result = runner.invoke(
+            main,
+            ["upgrade", "--project-root", str(tmp_path)],
+            input="n\n",
+            env={},
+        )
+    # Then
+    assert result.exit_code == 0
+    assert (tmp_path / "CLAUDE.md").read_text() == "# old content"
+
+
+def test_upgrade_fails_gracefully_when_no_config(tmp_path):
+    # Given
+    runner = CliRunner()
+    # When
+    result = runner.invoke(main, ["upgrade", "--project-root", str(tmp_path)])
+    # Then
+    assert result.exit_code == 1
+    assert ".argus.yml not found" in result.output
