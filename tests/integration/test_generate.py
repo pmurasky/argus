@@ -431,3 +431,36 @@ def test_fastapi_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "APIRouter" in (tmp_path / ".claude/rules/fastapi.md").read_text()
+
+
+NEXTJS_CONFIG = """\
+packs:
+  - nextjs
+platforms:
+  - claude
+"""
+
+
+def test_nextjs_pack_appears_in_packs_list():
+    """Given packs list is invoked, nextjs appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "nextjs" in result.output
+
+
+def test_nextjs_pack_show_renders_content():
+    """Given packs show nextjs is invoked, use client appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "nextjs"])
+    assert result.exit_code == 0
+    assert "use client" in result.output
+
+
+def test_nextjs_pack_generate_injects_content(tmp_path):
+    """Given a nextjs+claude config, generate writes content to .claude/rules/nextjs.md."""
+    (tmp_path / ".argus.yml").write_text(NEXTJS_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "use client" in (tmp_path / ".claude/rules/nextjs.md").read_text()
