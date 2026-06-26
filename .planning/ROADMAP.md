@@ -149,7 +149,11 @@ Plans:
   3. Running the test suite after all v1.1 changes achieves 80% unit test coverage on all changed modules (project's stated standard).
   4. `argus upgrade` detects when generated files are out of date and offers to regenerate them; exits non-zero in CI mode when files differ.
   5. `argus init` on a project with `.cursor/` or `.github/copilot-instructions.md` present automatically pre-selects those platforms in the scaffolded `.argus.yml`.
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 24-01-PLAN.md — TDD spring pack: 3 failing integration tests, then author pack files (IoC/stereotypes, Data JPA, REST design, Spring test slices; Spring Boot 4.x/jakarta, additive to java pack)
+- [ ] 24-02-PLAN.md — TDD mockito pack: 3 failing integration tests, then author pack files (@Mock vs @Spy, ArgumentCaptor, verify patterns, BDDMockito; JUnit 5/6, mock-mechanics only)
+- [ ] 24-03-PLAN.md — TDD CLI improvements: argus upgrade command (CLI-02) + init platform detection (CLI-03) + 80% coverage gate (CLI-01)
 
 ---
 
@@ -167,4 +171,4 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 | 21. Python & TypeScript Language Packs | 2/2 | Complete    | 2026-06-25 | - |
 | 22. Go, Java & Kotlin Language Packs | 3/3 | Complete    | 2026-06-25 | - |
 | 23. Python & JavaScript Framework Packs | 2/2 | Complete    | 2026-06-26 | - |
-| 24. Java Framework Packs & CLI Improvements | v1.1 | 0/TBD | Not started | - |
+| 24. Java Framework Packs & CLI Improvements | v1.1 | 0/3 | Not started | - |
