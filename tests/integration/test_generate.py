@@ -398,3 +398,36 @@ def test_kotlin_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "requireNotNull" in (tmp_path / ".claude/rules/kotlin.md").read_text()
+
+
+FASTAPI_CONFIG = """\
+packs:
+  - fastapi
+platforms:
+  - claude
+"""
+
+
+def test_fastapi_pack_appears_in_packs_list():
+    """Given packs list is invoked, fastapi appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "fastapi" in result.output
+
+
+def test_fastapi_pack_show_renders_content():
+    """Given packs show fastapi is invoked, APIRouter appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "fastapi"])
+    assert result.exit_code == 0
+    assert "APIRouter" in result.output
+
+
+def test_fastapi_pack_generate_injects_content(tmp_path):
+    """Given a fastapi+claude config, generate writes content to .claude/rules/fastapi.md."""
+    (tmp_path / ".argus.yml").write_text(FASTAPI_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "APIRouter" in (tmp_path / ".claude/rules/fastapi.md").read_text()
