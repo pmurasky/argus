@@ -134,7 +134,10 @@ Plans:
   1. User adds `fastapi` pack and generated files contain dependency injection patterns, async/await discipline, Pydantic model guidance, and router organization rules.
   2. User adds `nextjs` pack and generated files contain App Router conventions, server component vs client component guidance, React hooks discipline, and TypeScript integration rules.
   3. Both packs appear in `argus packs list` and respond to `argus packs show <name>`.
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 23-01-PLAN.md — TDD fastapi pack: 3 failing integration tests, then author pack files (async patterns, Pydantic v2 models, dependency injection, APIRouter organization; additive to python pack)
+- [ ] 23-02-PLAN.md — TDD nextjs pack: 3 failing integration tests, then author pack files (App Router conventions, server vs client components, hooks discipline, TS integration; additive to typescript pack)
 
 ### Phase 24: Java Framework Packs & CLI Improvements
 **Goal**: Users on Java/Spring stacks can apply Spring and Mockito packs; the CLI gains a coverage gate, an upgrade command, and automatic platform detection during `argus init`.
@@ -163,5 +166,5 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 | 20. Security Pack | 1/1 | Complete    | 2026-06-25 | - |
 | 21. Python & TypeScript Language Packs | 2/2 | Complete    | 2026-06-25 | - |
 | 22. Go, Java & Kotlin Language Packs | 3/3 | Complete    | 2026-06-25 | - |
-| 23. Python & JavaScript Framework Packs | v1.1 | 0/TBD | Not started | - |
+| 23. Python & JavaScript Framework Packs | v1.1 | 0/2 | Not started | - |
 | 24. Java Framework Packs & CLI Improvements | v1.1 | 0/TBD | Not started | - |
