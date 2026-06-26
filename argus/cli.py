@@ -77,6 +77,32 @@ DEFAULT_PACKS = ["atomic-commit", "tdd", "solid", "code-quality", "pre-commit"]
 DEFAULT_PLATFORMS = ["claude", "opencode", "copilot", "cursor", "gemini"]
 
 
+def _detect_platforms(project_root: Path) -> list[str]:
+    """Return platform IDs whose marker artifacts exist in project_root."""
+    markers = {
+        "claude":   lambda r: (r / ".claude").is_dir(),
+        "cursor":   lambda r: (r / ".cursor").is_dir(),
+        "copilot":  lambda r: (r / ".github/copilot-instructions.md").is_file(),
+        "gemini":   lambda r: (r / "GEMINI.md").is_file(),
+        "opencode": lambda r: (r / ".opencode").is_dir(),
+    }
+    return [name for name in DEFAULT_PLATFORMS if name in markers and markers[name](project_root)]
+
+
+def _build_init_yaml(packs: list[str], detected: list[str]) -> str:
+    """Build .argus.yml content: detected platforms active, undetected commented."""
+    lines = ["packs:"]
+    lines.extend(f"  - {p}" for p in packs)
+    active = detected if detected else DEFAULT_PLATFORMS
+    lines.append("platforms:")
+    lines.extend(f"  - {p}" for p in active)
+    if detected:
+        for p in DEFAULT_PLATFORMS:
+            if p not in detected:
+                lines.append(f"  # - {p}")
+    return "\n".join(lines) + "\n"
+
+
 @main.command()
 @click.option(
     "--project-root",
@@ -89,8 +115,8 @@ def init(project_root: Path) -> None:
     if config_path.exists():
         if not click.confirm(f"{config_path} already exists. Overwrite?"):
             return
-    config = {"packs": DEFAULT_PACKS, "platforms": DEFAULT_PLATFORMS}
-    config_path.write_text(yaml.dump(config, default_flow_style=False))
+    detected = _detect_platforms(project_root)
+    config_path.write_text(_build_init_yaml(DEFAULT_PACKS, detected))
     click.echo(f"✓ Written: {config_path}")
     click.echo("Edit .argus.yml to select packs and platforms, then run: argus generate")
 
