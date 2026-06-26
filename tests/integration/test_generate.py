@@ -497,3 +497,36 @@ def test_spring_pack_generate_injects_content(tmp_path):
     result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert "@SpringBootTest" in (tmp_path / ".claude/rules/spring.md").read_text()
+
+
+MOCKITO_CONFIG = """\
+packs:
+  - mockito
+platforms:
+  - claude
+"""
+
+
+def test_mockito_pack_appears_in_packs_list():
+    """Given packs list is invoked, mockito appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "list"])
+    assert result.exit_code == 0
+    assert "mockito" in result.output
+
+
+def test_mockito_pack_show_renders_content():
+    """Given packs show mockito is invoked, ArgumentCaptor appears in the output."""
+    runner = CliRunner()
+    result = runner.invoke(main, ["packs", "show", "mockito"])
+    assert result.exit_code == 0
+    assert "ArgumentCaptor" in result.output
+
+
+def test_mockito_pack_generate_injects_content(tmp_path):
+    """Given a mockito+claude config, generate writes content to .claude/rules/mockito.md."""
+    (tmp_path / ".argus.yml").write_text(MOCKITO_CONFIG)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert "ArgumentCaptor" in (tmp_path / ".claude/rules/mockito.md").read_text()
