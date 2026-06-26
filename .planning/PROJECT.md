@@ -40,6 +40,8 @@ One command, one config, all AI coding platforms — engineering discipline inje
 - LANG-03: go language pack discoverable, renderable, injectable — errors.Is/As, interface composition, goroutines, package naming — Validated in Phase 22: Go, Java & Kotlin Language Packs
 - LANG-04: java language pack discoverable, renderable, injectable — modern types, Optional.orElseThrow, OOP patterns, exceptions — Validated in Phase 22: Go, Java & Kotlin Language Packs
 - LANG-05: kotlin language pack discoverable, renderable, injectable — requireNotNull, coroutines, idiomatic Kotlin, K-over-Java idioms — Validated in Phase 22: Go, Java & Kotlin Language Packs
+- FWRK-01: fastapi framework pack discoverable, renderable, injectable — async-first, Pydantic v2, DI patterns, APIRouter organization — Validated in Phase 23: Python & JavaScript Framework Packs
+- FWRK-02: nextjs framework pack discoverable, renderable, injectable — App Router, server/client components, hooks discipline, TS integration — Validated in Phase 23: Python & JavaScript Framework Packs
 
 ### Out of Scope
 
@@ -56,7 +58,7 @@ One command, one config, all AI coding platforms — engineering discipline inje
 - **Pack gap:** `awesome-cursorrules` has 163+ community rules. Argus has 5 process packs. Language/framework/security packs are the biggest unmet demand.
 - **Skills.sh (Jan 2026):** npm-style skill package manager working across Claude Code, Codex CLI, Cursor — potential distribution channel for packs.
 - **Architecture:** Clean SOLID design. New platform = one adapter file, no existing code changes. New pack = one new directory.
-- **Test coverage:** 166 tests pass; coverage at 94.88% (above 80% threshold).
+- **Test coverage:** 172 tests pass; coverage at 94.88% (above 80% threshold).
 - **Version:** 0.1.1. PyPI CI workflow wired (tag-triggered publish).
 - **Always run tests with `.venv/bin/pytest`** — system python3 doesn't have argus-standards installed.
 
@@ -78,4 +80,4 @@ One command, one config, all AI coding platforms — engineering discipline inje
 | hatchling build backend | Modern, fast, zero config | ✓ Good |
 
 ---
-*Last updated: 2026-06-24 — Phase 22 complete (Go, Java & Kotlin Language Packs); 166 tests passing at 94.88% coverage*
+*Last updated: 2026-06-26 — Phase 23 complete (FastAPI & Next.js Framework Packs); 172 tests passing at 94.88% coverage*
