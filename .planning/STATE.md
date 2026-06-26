@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Pack Expansion
 status: unknown
-stopped_at: Phase 24 context gathered
-last_updated: "2026-06-26T22:42:47.551Z"
+stopped_at: Completed 24-01-PLAN.md
+last_updated: "2026-06-26T23:25:55.745Z"
 progress:
   total_phases: 7
   completed_phases: 6
-  total_plans: 13
-  completed_plans: 13
+  total_plans: 16
+  completed_plans: 14
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-06-23)
 
 **Core value:** One command, one config, all AI coding platforms — engineering discipline injected everywhere agents run.
-**Current focus:** Phase 23 — python-javascript-framework-packs
+**Current focus:** Phase 24 — java-framework-packs-cli-improvements
 
 ## Current Position
 
-Phase: 23 (python-javascript-framework-packs) — EXECUTING
-Plan: 1 of 2
+Phase: 24 (java-framework-packs-cli-improvements) — EXECUTING
+Plan: 1 of 3
 
 ## Performance Metrics
 
@@ -54,6 +54,7 @@ Plan: 1 of 2
 | Phase 22-go-java-kotlin-language-packs P03 | 2 | 2 tasks | 5 files |
 | Phase 23 P01 | 5 | 2 tasks | 5 files |
 | Phase 23 P02 | 3 | 2 tasks | 5 files |
+| Phase 24-java-framework-packs-cli-improvements P01 | 1 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -96,6 +97,9 @@ Recent decisions affecting current work:
 - [Phase 23]: FASTAPI_CONFIG isolation constant follows KOTLIN_CONFIG and prior pack precedents
 - [Phase 23]: use client chosen as key test phrase for nextjs pack — lives in instructions.md, stable and unique
 - [Phase 23]: NEXTJS_CONFIG isolation constant follows FASTAPI_CONFIG and prior pack precedents
+- [Phase 24-java-framework-packs-cli-improvements]: @SpringBootTest chosen as key test phrase for spring pack — lives in instructions.md Testing section, stable and unique
+- [Phase 24-java-framework-packs-cli-improvements]: SPRING_CONFIG isolation constant follows FASTAPI_CONFIG and prior pack precedents
+- [Phase 24-java-framework-packs-cli-improvements]: Spring pack: All content targets Spring Boot 4.x / Spring 7 (Jakarta EE 11) — no 2.x/3.x compatibility notes, zero java-pack overlap
 
 ### Pending Todos
 
@@ -108,6 +112,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-26T22:42:47.548Z
-Stopped at: Phase 24 context gathered
-Resume file: .planning/phases/24-java-framework-packs-cli-improvements/24-CONTEXT.md
+Last session: 2026-06-26T23:25:55.743Z
+Stopped at: Completed 24-01-PLAN.md
+Resume file: None
