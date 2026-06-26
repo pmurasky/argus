@@ -1,0 +1,5 @@
+name: nextjs
+description: App Router conventions, server components, and React hooks discipline
+category: framework
+requires: []
+platforms: [all]
