@@ -1,0 +1,5 @@
+name: fastapi
+description: Async-first routing, Pydantic v2 models, and dependency injection patterns
+category: framework
+requires: []
+platforms: [all]
