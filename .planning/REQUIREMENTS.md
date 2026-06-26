@@ -34,9 +34,9 @@
 
 ### CLI & Core
 
-- [ ] **CLI-01**: All changed code reaches 80% unit test coverage (project's own stated standard)
-- [ ] **CLI-02**: `argus upgrade` command detects out-of-date generated files and offers to regenerate them
-- [ ] **CLI-03**: `argus init` detects installed platforms from project files (`.cursor/`, `.github/`, `.windsurf/`, etc.) and pre-selects them
+- [x] **CLI-01**: All changed code reaches 80% unit test coverage (project's own stated standard)
+- [x] **CLI-02**: `argus upgrade` command detects out-of-date generated files and offers to regenerate them
+- [x] **CLI-03**: `argus init` detects installed platforms from project files (`.cursor/`, `.github/`, `.windsurf/`, etc.) and pre-selects them
 
 ## Future Requirements
 
@@ -92,9 +92,9 @@
 | FWRK-02     | Phase 23 | Complete |
 | FWRK-03     | Phase 24 | Complete |
 | FWRK-04     | Phase 24 | Complete |
-| CLI-01      | Phase 24 | Pending |
-| CLI-02      | Phase 24 | Pending |
-| CLI-03      | Phase 24 | Pending |
+| CLI-01      | Phase 24 | Complete |
+| CLI-02      | Phase 24 | Complete |
+| CLI-03      | Phase 24 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 17 total

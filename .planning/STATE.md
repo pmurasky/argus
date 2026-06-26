@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Pack Expansion
 status: unknown
-stopped_at: Completed 24-02-PLAN.md
-last_updated: "2026-06-26T23:28:54.029Z"
+stopped_at: Completed 24-03-PLAN.md
+last_updated: "2026-06-26T23:32:50.020Z"
 progress:
   total_phases: 7
-  completed_phases: 6
+  completed_phases: 7
   total_plans: 16
-  completed_plans: 15
+  completed_plans: 16
 ---
 
 # Project State
@@ -56,6 +56,7 @@ Plan: 1 of 3
 | Phase 23 P02 | 3 | 2 tasks | 5 files |
 | Phase 24-java-framework-packs-cli-improvements P01 | 1 | 2 tasks | 3 files |
 | Phase 24 P02 | 4 | 2 tasks | 3 files |
+| Phase 24 P03 | 8 min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -104,6 +105,8 @@ Recent decisions affecting current work:
 - [Phase 24]: ArgumentCaptor chosen as key test phrase for mockito pack — lives in instructions.md Argument Captors section, stable and unique
 - [Phase 24]: MOCKITO_CONFIG isolation constant follows SPRING_CONFIG and prior pack precedents
 - [Phase 24]: Mockito pack: mock-mechanics only — FORBIDDEN: @MockBean, @SpyBean (Spring), @RunWith (JUnit 4)
+- [Phase 24]: _compute_changed_files extracted as shared helper so generate --check and upgrade stay DRY
+- [Phase 24]: _build_init_yaml produces flat key:/indented-list YAML for deterministic order with comments
 
 ### Pending Todos
 
@@ -116,6 +119,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-26T23:28:54.027Z
-Stopped at: Completed 24-02-PLAN.md
+Last session: 2026-06-26T23:32:50.018Z
+Stopped at: Completed 24-03-PLAN.md
 Resume file: None
