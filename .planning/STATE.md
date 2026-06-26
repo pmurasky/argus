@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Pack Expansion
 status: unknown
-stopped_at: Completed 23-01-PLAN.md
-last_updated: "2026-06-26T02:28:24.474Z"
+stopped_at: Completed 23-02-PLAN.md
+last_updated: "2026-06-26T02:31:23.605Z"
 progress:
   total_phases: 7
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 13
-  completed_plans: 12
+  completed_plans: 13
 ---
 
 # Project State
@@ -53,6 +53,7 @@ Plan: 1 of 2
 | Phase 22 P02 | 2 min | 2 tasks | 5 files |
 | Phase 22-go-java-kotlin-language-packs P03 | 2 | 2 tasks | 5 files |
 | Phase 23 P01 | 5 | 2 tasks | 5 files |
+| Phase 23 P02 | 3 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -93,6 +94,8 @@ Recent decisions affecting current work:
 - [Phase 22]: Kotlin pack is framework-agnostic — FORBIDDEN: Ktor, Android, Compose, Jetpack (belong in Phase 23 framework packs)
 - [Phase 23]: APIRouter chosen as key test phrase for fastapi pack — lives in instructions.md Router Organization section, stable and unique
 - [Phase 23]: FASTAPI_CONFIG isolation constant follows KOTLIN_CONFIG and prior pack precedents
+- [Phase 23]: use client chosen as key test phrase for nextjs pack — lives in instructions.md, stable and unique
+- [Phase 23]: NEXTJS_CONFIG isolation constant follows FASTAPI_CONFIG and prior pack precedents
 
 ### Pending Todos
 
@@ -105,6 +108,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-26T02:28:18.114Z
-Stopped at: Completed 23-01-PLAN.md
+Last session: 2026-06-26T02:31:23.602Z
+Stopped at: Completed 23-02-PLAN.md
 Resume file: None

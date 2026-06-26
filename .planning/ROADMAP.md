@@ -45,7 +45,7 @@ and a smarter CLI — making Argus useful for any language or framework team.
 
 #### Phase 23: Python & JavaScript Framework Packs
 
-- [ ] **Phase 23: Python & JavaScript Framework Packs** - Ship `fastapi` and `nextjs` framework packs
+- [x] **Phase 23: Python & JavaScript Framework Packs** - Ship `fastapi` and `nextjs` framework packs (completed 2026-06-26)
 
 #### Phase 24: Java Framework Packs & CLI Improvements
 
@@ -166,5 +166,5 @@ Phases execute in numeric order: 18 → 19 → 20 → 21 → 22 → 23 → 24
 | 20. Security Pack | 1/1 | Complete    | 2026-06-25 | - |
 | 21. Python & TypeScript Language Packs | 2/2 | Complete    | 2026-06-25 | - |
 | 22. Go, Java & Kotlin Language Packs | 3/3 | Complete    | 2026-06-25 | - |
-| 23. Python & JavaScript Framework Packs | 1/2 | In Progress|  | - |
+| 23. Python & JavaScript Framework Packs | 2/2 | Complete   | 2026-06-26 | - |
 | 24. Java Framework Packs & CLI Improvements | v1.1 | 0/TBD | Not started | - |
