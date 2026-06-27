@@ -1,0 +1,49 @@
+# Testcontainers
+
+## Core Rule
+Use Testcontainers only when the behavior under test depends on the real service's semantics —
+SQL constraints, index behavior, Redis TTL eviction, Kafka partition assignment. If an in-memory
+fake gives equal confidence, use the fake: it starts in microseconds and has no Docker dependency.
+
+## When to Use Containers
+
+| Scenario | Use |
+|---|---|
+| DB constraint / migration correctness | Testcontainers |
+| Kafka partition / consumer group semantics | Testcontainers |
+| Redis TTL / eviction / pub-sub | Testcontainers |
+| Simple CRUD (no constraint logic) | In-memory fake |
+| External HTTP API call | HTTP stub (e.g., WireMock / responses) |
+| Queue enqueue/dequeue abstraction | Fake implementation |
+
+## Container Lifecycle
+
+Containers are expensive to start (1–10 seconds each). Default to **session scope** — one
+container per test run, shared across all tests that need it. Use **function scope** only when
+tests corrupt shared state in a way that cannot be reset (e.g., schema migrations mid-run).
+
+Reset state between tests by truncating tables or flushing keys — do not restart the container.
+
+## Wait Strategies
+
+Never assume a container is ready when Docker reports it started. Always configure a wait
+strategy before the first query:
+
+- **Postgres / MySQL:** wait for port + log line ("database system is ready to accept connections")
+- **Redis:** wait for listening port
+- **Kafka:** wait for log line or topic availability
+
+Never use `time.sleep` as a wait strategy — it either waits too long or fails intermittently.
+
+## CI Requirements
+
+Testcontainers requires a Docker daemon accessible to the test runner. Ensure your CI environment
+has Docker-in-Docker (DinD) or a mounted Docker socket. If Docker is unavailable, the test suite
+must fail fast with a clear error — not silently skip integration tests.
+
+## Red Flags — Stop and Correct
+- Container created and destroyed per test function (use session or class scope instead)
+- `time.sleep` used instead of a wait strategy or health check
+- `testcontainers` imported in production (non-test) code
+- Testcontainers used for simple CRUD with no DB-specific semantics (use an in-memory fake)
+- Container restarted between tests to reset state (truncate or flush instead)
