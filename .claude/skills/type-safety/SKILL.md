@@ -14,7 +14,7 @@ description: Python type annotations — all functions annotated, mypy clean
 - [ ] `X | None` used instead of `Optional[X]`
 - [ ] Built-in generics used: `list[str]` not `List[str]`
 - [ ] `Any` appears only at YAML/JSON/CLI boundaries, never in function signatures
-- [ ] `mypy argus/` exits 0
+- [ ] `mypy .` exits 0
 
 
 ## Type Safety Examples

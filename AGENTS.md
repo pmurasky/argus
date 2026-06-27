@@ -190,7 +190,7 @@ If you are unsure whether a commit is ready: it is not ready. Fix the uncertaint
 
 ## Core Rule
 Every function and method must have fully annotated parameters and return type.
-Run `mypy argus/` before committing — it must exit 0.
+Run `mypy .` (or `mypy <your-project>/`) before committing — it must exit 0.
 
 ## Annotation Requirements
 - All parameters annotated — no bare untyped arguments
@@ -216,9 +216,9 @@ Assign the unstructured value to a typed local variable as soon as its shape is 
 # Error Handling
 
 ## Exception Design
-- All custom exceptions inherit from a project-level base exception (e.g. `ArgusError`)
+- All custom exceptions inherit from a project-level base exception (e.g. `AppError`)
 - Exception names end in `Error`
-- Define the project base exception in the project's root package (e.g. `argus/__init__.py`); define subclass exceptions in the module that raises them, importing the base
+- Define the project base exception in the project's root package (e.g. `app/__init__.py`); define subclass exceptions in the module that raises them, importing the base
 - Exceptions carry a human-readable message sufficient to understand the failure
 
 ## Raise vs Return
@@ -477,3 +477,56 @@ internals to write a test, that is a signal to inject the dependency instead.
 - Integration test covering business logic (that belongs in unit tests)
 - Unit test hitting a real database or network
 - Test suite takes more than 5 minutes to run locally (pyramid is inverted)
+
+
+## TESTCONTAINERS
+
+# Testcontainers
+
+## Core Rule
+Use Testcontainers only when the behavior under test depends on the real service's semantics —
+SQL constraints, index behavior, Redis TTL eviction, Kafka partition assignment. If an in-memory
+fake gives equal confidence, use the fake: it starts in microseconds and has no Docker dependency.
+
+## When to Use Containers
+
+| Scenario | Use |
+|---|---|
+| DB constraint / migration correctness | Testcontainers |
+| Kafka partition / consumer group semantics | Testcontainers |
+| Redis TTL / eviction / pub-sub | Testcontainers |
+| Simple CRUD (no constraint logic) | In-memory fake |
+| External HTTP API call | HTTP stub (e.g., WireMock / responses) |
+| Queue enqueue/dequeue abstraction | Fake implementation |
+
+## Container Lifecycle
+
+Containers are expensive to start (1–10 seconds each). Default to **session scope** — one
+container per test run, shared across all tests that need it. Use **function scope** only when
+tests corrupt shared state in a way that cannot be reset (e.g., schema migrations mid-run).
+
+Reset state between tests by truncating tables or flushing keys — do not restart the container.
+
+## Wait Strategies
+
+Never assume a container is ready when Docker reports it started. Always configure a wait
+strategy before the first query:
+
+- **Postgres / MySQL:** wait for port + log line ("database system is ready to accept connections")
+- **Redis:** wait for listening port
+- **Kafka:** wait for log line or topic availability
+
+Never use `time.sleep` as a wait strategy — it either waits too long or fails intermittently.
+
+## CI Requirements
+
+Testcontainers requires a Docker daemon accessible to the test runner. Ensure your CI environment
+has Docker-in-Docker (DinD) or a mounted Docker socket. If Docker is unavailable, the test suite
+must fail fast with a clear error — not silently skip integration tests.
+
+## Red Flags — Stop and Correct
+- Container created and destroyed per test function (use session or class scope instead)
+- `time.sleep` used instead of a wait strategy or health check
+- `testcontainers` imported in production (non-test) code
+- Testcontainers used for simple CRUD with no DB-specific semantics (use an in-memory fake)
+- Container restarted between tests to reset state (truncate or flush instead)

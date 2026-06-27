@@ -3,9 +3,9 @@
 # Error Handling
 
 ## Exception Design
-- All custom exceptions inherit from a project-level base exception (e.g. `ArgusError`)
+- All custom exceptions inherit from a project-level base exception (e.g. `AppError`)
 - Exception names end in `Error`
-- Define the project base exception in the project's root package (e.g. `argus/__init__.py`); define subclass exceptions in the module that raises them, importing the base
+- Define the project base exception in the project's root package (e.g. `app/__init__.py`); define subclass exceptions in the module that raises them, importing the base
 - Exceptions carry a human-readable message sufficient to understand the failure
 
 ## Raise vs Return

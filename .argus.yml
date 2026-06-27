@@ -11,6 +11,7 @@ packs:
 - design-patterns
 - refactoring
 - testing-strategy
+- testcontainers
 platforms:
 - claude
 - opencode

@@ -24,15 +24,15 @@ description: Docstrings on public API and CLI commands; comments only for non-ob
 ### Correct
 
 ```python
-class PackLoader:
-    """Load packs from built-in and custom search paths."""
+class DataLoader:
+    """Load records from built-in and custom search paths."""
 
-def available_packs(self) -> list[str]:
-    """Return sorted list of all discoverable pack names."""
+def list_items(self) -> list[str]:
+    """Return sorted list of all discoverable item names."""
 
 @main.command()
 def generate(...):
-    """Generate platform-specific files from .argus.yml"""
+    """Generate platform-specific files from config."""
 
 # YAML safe_load returns Any — typed immediately below
 data: dict[str, Any] = yaml.safe_load(path.read_text())
@@ -41,11 +41,11 @@ data: dict[str, Any] = yaml.safe_load(path.read_text())
 ### Incorrect
 
 ```python
-class PackLoader:
-    """PackLoader class."""          # restates the name
+class DataLoader:
+    """DataLoader class."""          # restates the name
 
-def available_packs(self):
-    """Gets the available packs."""  # wrong mood, explains what
+def list_items(self):
+    """Gets the available items."""  # wrong mood, explains what
 
 # increment the counter
 i += 1                               # explains what, not why
@@ -55,5 +55,5 @@ i += 1                               # explains what, not why
 
 ```python
 def __init__(self, project_root: Path) -> None: ...
-def _load_one(self, name: str) -> Pack: ...
+def _load_one(self, name: str) -> Record: ...
 ```
