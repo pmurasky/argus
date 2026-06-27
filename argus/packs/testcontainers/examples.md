@@ -198,7 +198,7 @@ func TestMain(m *testing.M) {
 
     redisContainer, err := redis.RunContainer(ctx,
         testcontainers.WithImage("redis:7"),
-        testcontainers.WithWaitStrategy(wait.ForListeningPort()),
+        testcontainers.WithWaitStrategy(wait.ForListeningPort("6379/tcp")),
     )
     if err != nil {
         fmt.Fprintf(os.Stderr, "redis container: %v\n", err)
