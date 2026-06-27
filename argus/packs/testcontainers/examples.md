@@ -9,7 +9,6 @@
 import pytest
 import psycopg2
 import redis as redis_client
-from kafka import KafkaProducer
 from testcontainers.postgres import PostgresContainer
 from testcontainers.redis import RedisContainer
 from testcontainers.kafka import KafkaContainer
@@ -35,7 +34,13 @@ def kafka_container():
 
 @pytest.fixture()
 def pg_conn(postgres_container):
-    conn = psycopg2.connect(postgres_container.get_connection_url())
+    conn = psycopg2.connect(
+        host=postgres_container.get_container_host_ip(),
+        port=postgres_container.get_exposed_port(5432),
+        dbname=postgres_container.dbname,
+        user=postgres_container.username,
+        password=postgres_container.password,
+    )
     yield conn
     with conn.cursor() as cur:
         cur.execute("TRUNCATE users RESTART IDENTITY CASCADE")
@@ -154,6 +159,7 @@ package integration_test
 import (
     "context"
     "database/sql"
+    "errors"
     "fmt"
     "os"
     "testing"
@@ -190,7 +196,10 @@ func TestMain(m *testing.M) {
     defer pgContainer.Terminate(ctx)
     postgresURL, _ = pgContainer.ConnectionString(ctx, "sslmode=disable")
 
-    redisContainer, err := redis.RunContainer(ctx, testcontainers.WithImage("redis:7"))
+    redisContainer, err := redis.RunContainer(ctx,
+        testcontainers.WithImage("redis:7"),
+        testcontainers.WithWaitStrategy(wait.ForListeningPort()),
+    )
     if err != nil {
         fmt.Fprintf(os.Stderr, "redis container: %v\n", err)
         os.Exit(1)
