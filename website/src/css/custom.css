@@ -1,30 +1,83 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+/* Detroit Lions color theme */
+/* Honolulu Blue: #0076B6 | Black: #000000 | Silver: #B0B7BC */
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #0076B6;
+  --ifm-color-primary-dark: #006AA4;
+  --ifm-color-primary-darker: #005A8E;
+  --ifm-color-primary-darkest: #004470;
+  --ifm-color-primary-light: #1A8FCC;
+  --ifm-color-primary-lighter: #2EAEE6;
+  --ifm-color-primary-lightest: #5ABFEC;
+
+  --ifm-navbar-background-color: #0076B6;
+  --ifm-navbar-link-color: #ffffff;
+  --ifm-navbar-link-hover-color: #B0B7BC;
+  --ifm-navbar-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  --ifm-footer-background-color: #000000;
+  --ifm-footer-color: #ffffff;
+  --ifm-footer-link-color: #1A9FE0;
+  --ifm-footer-link-hover-color: #B0B7BC;
+
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 118, 182, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #1A9FE0;
+  --ifm-color-primary-dark: #0E8DCE;
+  --ifm-color-primary-darker: #0876AE;
+  --ifm-color-primary-darkest: #005A8E;
+  --ifm-color-primary-light: #2EAEE6;
+  --ifm-color-primary-lighter: #42BCEC;
+  --ifm-color-primary-lightest: #70CEF2;
+
+  --ifm-background-color: #1a1a1a;
+  --ifm-background-surface-color: #242424;
+  --docusaurus-highlighted-code-line-bg: rgba(26, 159, 224, 0.15);
+}
+
+/* Navbar: white text on Lions blue */
+.navbar {
+  background-color: #0076B6;
+}
+
+.navbar__brand,
+.navbar__title,
+.navbar__link {
+  color: #ffffff !important;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  color: #B0B7BC !important;
+}
+
+/* Footer: white on black */
+.footer {
+  background-color: #000000;
+}
+
+.footer__title {
+  color: #ffffff;
+}
+
+.footer__copyright {
+  color: #B0B7BC;
+}
+
+/* Code block headers: black with white text */
+.prism-code {
+  border-top: 3px solid #0076B6;
+}
+
+/* Sidebar active item */
+.menu__link--active {
+  background-color: rgba(0, 118, 182, 0.12);
+}
+
+/* Admonition tip: Lions silver accent */
+.alert--success {
+  --ifm-alert-border-color: #B0B7BC;
 }
