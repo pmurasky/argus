@@ -225,7 +225,7 @@ def test_upgrade_prompts_and_writes_when_confirmed(tmp_path):
             main,
             ["upgrade", "--project-root", str(tmp_path)],
             input="y\n",
-            env={},
+            env={"CI": None},
         )
     # Then
     assert result.exit_code == 0
@@ -244,7 +244,7 @@ def test_upgrade_does_not_write_when_declined(tmp_path):
             main,
             ["upgrade", "--project-root", str(tmp_path)],
             input="n\n",
-            env={},
+            env={"CI": None},
         )
     # Then
     assert result.exit_code == 0
