@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "argus",
+  "description": "AI Agent Engineering Standards Layer — composable TDD, SOLID, and code-quality standards for coding agents.",
+  "owner": {
+    "name": "Peter Murasky Jr",
+    "url": "https://github.com/pmurasky"
+  },
+  "plugins": [
+    {
+      "name": "argus-standards",
+      "description": "TDD, SOLID, atomic-commit, and code-quality skills generated from the same packs as the argus-standards CLI.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

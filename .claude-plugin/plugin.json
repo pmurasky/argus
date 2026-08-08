@@ -1,0 +1,20 @@
+{
+  "name": "argus-standards",
+  "version": "0.1.1",
+  "description": "AI Agent Engineering Standards Layer — TDD, SOLID, atomic commits, and code-quality skills for coding agents.",
+  "author": {
+    "name": "Peter Murasky Jr",
+    "email": "peter.murasky@gmail.com"
+  },
+  "homepage": "https://github.com/pmurasky/argus",
+  "repository": "https://github.com/pmurasky/argus",
+  "license": "MIT",
+  "keywords": [
+    "tdd",
+    "solid",
+    "code-quality",
+    "engineering-standards",
+    "atomic-commit"
+  ],
+  "skills": "./.claude/skills/"
+}
