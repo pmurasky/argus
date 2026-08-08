@@ -3,7 +3,6 @@ import sys
 from pathlib import Path
 
 import click
-import yaml
 
 from argus.adapters.base import GeneratedFile
 from argus.config import ArgusConfig
