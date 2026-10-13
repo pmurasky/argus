@@ -22,6 +22,12 @@ def test_opencode_json_is_valid_json():
     assert "$schema" in data
 
 
+def test_opencode_json_uses_documented_instructions_array():
+    files = OpenCodeAdapter().generate([stub_pack("tdd")])
+    oc_json = next(f for f in files if f.path == Path("opencode.json"))
+    assert json.loads(oc_json.content)["instructions"] == ["AGENTS.md"]
+
+
 def test_opencode_generates_skill_per_pack():
     files = OpenCodeAdapter().generate([stub_pack("tdd"), stub_pack("solid")])
     paths = [f.path for f in files]

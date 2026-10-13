@@ -1,6 +1,59 @@
+import json
+
 from click.testing import CliRunner
 
 from argus.cli import main
+
+OPENCODE_ONLY_CONFIG = """\
+packs:
+  - tdd
+platforms:
+  - opencode
+"""
+
+EXISTING_OPENCODE_JSON = {
+    "$schema": "https://opencode.ai/config.json",
+    "default_agent": "standards-build",
+    "instructions": ["docs/AI_AGENT_WORKFLOW.md"],
+    "mcp": {"gsd": {"type": "local", "command": ["gsd", "--mode", "mcp"]}},
+    "plugin": ["context-mode", "opentmux"],
+}
+
+
+def test_generate_preserves_existing_opencode_json_keys(tmp_path):
+    """Given a rich existing opencode.json, generate deep-merges instead of replacing."""
+    (tmp_path / ".argus.yml").write_text(OPENCODE_ONLY_CONFIG)
+    (tmp_path / "opencode.json").write_text(json.dumps(EXISTING_OPENCODE_JSON, indent=2))
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    merged = json.loads((tmp_path / "opencode.json").read_text())
+    assert merged["default_agent"] == "standards-build"
+    assert merged["instructions"] == ["docs/AI_AGENT_WORKFLOW.md", "AGENTS.md"]
+    assert merged["mcp"]["gsd"] == {"type": "local", "command": ["gsd", "--mode", "mcp"]}
+    assert merged["plugin"] == ["context-mode", "opentmux"]
+
+
+def test_generate_check_is_stable_with_foreign_opencode_json_content(tmp_path):
+    """Given a merged opencode.json, check mode reports no drift in mixed-tool repos."""
+    (tmp_path / ".argus.yml").write_text(OPENCODE_ONLY_CONFIG)
+    (tmp_path / "opencode.json").write_text(json.dumps(EXISTING_OPENCODE_JSON, indent=2))
+    runner = CliRunner()
+    runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    result = runner.invoke(main, ["generate", "--check", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+
+
+def test_generate_leaves_invalid_json_untouched_with_warning(tmp_path):
+    """Given an opencode.json that is not strict JSON, generate skips it and warns."""
+    (tmp_path / ".argus.yml").write_text(OPENCODE_ONLY_CONFIG)
+    original = '{\n  // jsonc comment\n  "instructions": ["x"]\n}\n'
+    (tmp_path / "opencode.json").write_text(original)
+    runner = CliRunner()
+    result = runner.invoke(main, ["generate", "--project-root", str(tmp_path)])
+    assert result.exit_code == 0, result.output
+    assert (tmp_path / "opencode.json").read_text() == original
+    assert "opencode.json" in result.output
 
 FULL_CONFIG = """\
 packs:
