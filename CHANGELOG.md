@@ -1,7 +1,8 @@
-## Unreleased
+## v0.1.2 (2026-10-12)
 
 ### Fix
 
+- **opencode**: deep-merge opencode.json instead of overwriting — unknown keys (mcp servers, plugin, model, default_agent) are preserved, `instructions` is unioned with "AGENTS.md", invalid JSON is skipped with a warning, and `generate --check` is drift-stable in mixed-tool repos (#1)
 - **lint**: split long string in _claude_md to stay under 100 chars
 
 ### Refactor
