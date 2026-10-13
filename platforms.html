@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.10.1">
 <title data-rh="true">Platforms | Argus Standards</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://pmurasky.github.io/argus/platforms"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Platforms | Argus Standards"><meta data-rh="true" name="description" content="A platform adapter controls which files get written and in what format. List the platforms you use in .argus.yml."><meta data-rh="true" property="og:description" content="A platform adapter controls which files get written and in what format. List the platforms you use in .argus.yml."><link data-rh="true" rel="icon" href="/argus/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://pmurasky.github.io/argus/platforms"><link data-rh="true" rel="alternate" href="https://pmurasky.github.io/argus/platforms" hreflang="en"><link data-rh="true" rel="alternate" href="https://pmurasky.github.io/argus/platforms" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Platforms","item":"https://pmurasky.github.io/argus/platforms"}]}</script><link rel="stylesheet" href="/argus/assets/css/styles.b17cb05e.css">
-<script src="/argus/assets/js/runtime~main.7500997c.js" defer="defer"></script>
+<script src="/argus/assets/js/runtime~main.b3360c1f.js" defer="defer"></script>
 <script src="/argus/assets/js/main.8ff3efa4.js" defer="defer"></script>
 </head>
 <body>
@@ -39,6 +39,12 @@
 <li class=""><code>opencode.json</code> — OpenCode configuration</li>
 <li class=""><code>.opencode/commands/{pack}.md</code> — one command file per pack</li>
 </ul>
+<p><code>opencode.json</code> is <strong>deep-merged</strong>, never replaced. Argus claims only two keys:</p>
+<ul>
+<li class=""><code>$schema</code> — refreshed to the current schema URL</li>
+<li class=""><code>instructions</code> — <code>&quot;AGENTS.md&quot;</code> is unioned into the list; existing entries are preserved</li>
+</ul>
+<p>All other keys (<code>mcp</code> servers, <code>plugin</code>, <code>model</code>, <code>default_agent</code>, …) — including entries managed by other tools — are left untouched, and <code>argus generate --check</code> stays drift-free in mixed-tool repos. If the existing file is not valid JSON (e.g. JSONC with comments), argus skips it with a warning rather than risk data loss.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="gemini-cli-gemini">Gemini CLI (<code>gemini</code>)<a href="#gemini-cli-gemini" class="hash-link" aria-label="Direct link to gemini-cli-gemini" title="Direct link to gemini-cli-gemini" translate="no">​</a></h3>
 <p>Generates:</p>
 <ul>
