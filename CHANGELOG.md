@@ -1,3 +1,9 @@
+## Unreleased
+
+### Feat
+
+- **agents-md**: preserve foreign HTML-comment-marked blocks across regeneration, appended at end of file — `generate --check` is drift-stable in mixed-tool repos (#2)
+
 ## v0.1.2 (2026-10-12)
 
 ### Fix

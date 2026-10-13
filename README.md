@@ -99,6 +99,12 @@ All platforms also receive `AGENTS.md` (OpenAI Codex / general agents).
 
 All other keys (`mcp` servers, `plugin`, `model`, `default_agent`, …) — including entries managed by other tools — are left untouched, and `argus generate --check` stays drift-free in mixed-tool repos. If the existing `opencode.json` is not valid JSON (e.g. JSONC with comments), argus skips it with a warning rather than risk data loss.
 
+### AGENTS.md marked-block ownership
+
+`argus generate` **preserves foreign marked blocks** in `AGENTS.md`. Any balanced HTML-comment marker pair of the form `<!-- <tool>:<section>:start -->` ... `<!-- <tool>:<section>:end -->` (e.g. gortex's `<!-- gortex:communities:start/end -->`) is carried across regeneration untouched and appended at the end of the file, so other tools' sections are never dropped and `argus generate --check` stays drift-free.
+
+Content outside recognized markers is argus-owned and regenerated as usual. Unbalanced markers (a start without a matching end) are treated as ordinary content.
+
 ## Development Setup
 
 ```bash

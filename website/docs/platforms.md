@@ -20,6 +20,12 @@ A platform adapter controls which files get written and in what format. List the
 
 All platforms also receive `AGENTS.md` — the cross-tool baseline that OpenAI Codex and other tools read.
 
+### AGENTS.md marked-block ownership
+
+`argus generate` **preserves foreign marked blocks** in `AGENTS.md`. Any balanced HTML-comment marker pair of the form `<!-- <tool>:<section>:start -->` ... `<!-- <tool>:<section>:end -->` (e.g. gortex's `<!-- gortex:communities:start/end -->`) is carried across regeneration untouched and appended at the end of the file, so other tools' sections are never dropped and `argus generate --check` stays drift-free.
+
+Content outside recognized markers is argus-owned and regenerated as usual. Unbalanced markers (a start without a matching end) are treated as ordinary content.
+
 ## Platform Details
 
 ### Claude Code (`claude`)
