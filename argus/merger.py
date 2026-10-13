@@ -1,6 +1,7 @@
 """Merge strategies for combining generated files with existing user content."""
 
 import json
+import re
 from typing import Any, Protocol
 
 from argus import ArgusError
@@ -58,3 +59,19 @@ class JsonMerger:
         existing_items = existing if isinstance(existing, list) else [existing]
         generated_items = generated if isinstance(generated, list) else [generated]
         return existing_items + [g for g in generated_items if g not in existing_items]
+
+
+class MarkedBlockMerger:
+    """Carry foreign HTML-comment-marked blocks across regeneration."""
+
+    _BLOCK_RE = re.compile(
+        r"<!--\s*(?P<name>[\w-]+:[\w-]+):start\s*-->.*?<!--\s*(?P=name):end\s*-->",
+        re.DOTALL,
+    )
+
+    def merge(self, existing: str, generated: str) -> str | None:
+        """Append preserved marked blocks to generated content, or return generated unchanged."""
+        blocks = [m.group(0) for m in self._BLOCK_RE.finditer(existing)]
+        if not blocks:
+            return generated
+        return generated.rstrip("\n") + "\n\n" + "\n\n".join(blocks)
