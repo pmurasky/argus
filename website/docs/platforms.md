@@ -44,6 +44,13 @@ Generates:
 - `opencode.json` — OpenCode configuration
 - `.opencode/commands/{pack}.md` — one command file per pack
 
+`opencode.json` is **deep-merged**, never replaced. Argus claims only two keys:
+
+- `$schema` — refreshed to the current schema URL
+- `instructions` — `"AGENTS.md"` is unioned into the list; existing entries are preserved
+
+All other keys (`mcp` servers, `plugin`, `model`, `default_agent`, …) — including entries managed by other tools — are left untouched, and `argus generate --check` stays drift-free in mixed-tool repos. If the existing file is not valid JSON (e.g. JSONC with comments), argus skips it with a warning rather than risk data loss.
+
 ### Gemini CLI (`gemini`)
 
 Generates:

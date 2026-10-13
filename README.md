@@ -90,6 +90,15 @@ Packs are composable engineering standards. Include only the ones your project n
 
 All platforms also receive `AGENTS.md` (OpenAI Codex / general agents).
 
+### OpenCode config ownership
+
+`argus generate` **deep-merges** `opencode.json` instead of replacing it. Argus claims only two keys:
+
+- `$schema` — refreshed to the current schema URL
+- `instructions` — `"AGENTS.md"` is unioned into the list; your existing entries are preserved
+
+All other keys (`mcp` servers, `plugin`, `model`, `default_agent`, …) — including entries managed by other tools — are left untouched, and `argus generate --check` stays drift-free in mixed-tool repos. If the existing `opencode.json` is not valid JSON (e.g. JSONC with comments), argus skips it with a warning rather than risk data loss.
+
 ## Development Setup
 
 ```bash
