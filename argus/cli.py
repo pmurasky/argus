@@ -10,15 +10,39 @@ from argus.generator import AdapterConflictError, AdapterRegistry, Generator, Un
 from argus.loader import PackLoader, PackNotFoundError
 
 
+def _resolve_content(f: GeneratedFile, project_root: Path) -> str | None:
+    """Return the content to write, or None to leave the existing file untouched."""
+    target = project_root / f.path
+    if f.merger is None or not target.exists():
+        return f.content
+    merged = f.merger.merge(target.read_text(), f.content)
+    if merged is None:
+        click.echo(f"  ! {f.path}: not valid JSON, left unchanged", err=True)
+        return None
+    return merged
+
+
+def _write_file(f: GeneratedFile, content: str, project_root: Path) -> None:
+    """Write resolved content to the file's path under project_root."""
+    target = project_root / f.path
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(content)
+    click.echo(f"  ✓ {f.path}")
+
+
 def _compute_changed_files(
     files: list[GeneratedFile], project_root: Path
 ) -> list[GeneratedFile]:
     """Return files that would change if written to project_root."""
-    return [
-        f for f in files
-        if not (project_root / f.path).exists()
-        or (project_root / f.path).read_text() != f.content
-    ]
+    changed = []
+    for f in files:
+        content = _resolve_content(f, project_root)
+        target = project_root / f.path
+        if content is not None and (
+            not target.exists() or target.read_text() != content
+        ):
+            changed.append(f)
+    return changed
 
 
 @click.group()
@@ -66,10 +90,9 @@ def generate(dry_run: bool, check: bool, project_root: Path) -> None:
         return
 
     for f in files:
-        target = project_root / f.path
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(f.content)
-        click.echo(f"  ✓ {f.path}")
+        content = _resolve_content(f, project_root)
+        if content is not None:
+            _write_file(f, content, project_root)
 
 
 DEFAULT_PACKS = ["atomic-commit", "tdd", "solid", "code-quality", "pre-commit"]
@@ -157,10 +180,9 @@ def upgrade(project_root: Path) -> None:
 
     if click.confirm("Regenerate now?", default=False):
         for f in changed:
-            target = project_root / f.path
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(f.content)
-            click.echo(f"  ✓ {f.path}")
+            content = _resolve_content(f, project_root)
+            if content is not None:
+                _write_file(f, content, project_root)
 
 
 @main.group()

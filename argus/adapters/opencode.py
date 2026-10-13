@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 from argus.adapters.base import GENERATED_HEADER, BaseAdapter, GeneratedFile, Pack
+from argus.merger import JsonMerger
 
 
 class OpenCodeAdapter(BaseAdapter):
@@ -17,8 +18,15 @@ class OpenCodeAdapter(BaseAdapter):
         ]
 
     def _opencode_json(self) -> GeneratedFile:
-        config = {"$schema": "https://opencode.ai/config.json", "instructions": "AGENTS.md"}
-        return GeneratedFile(path=Path("opencode.json"), content=json.dumps(config, indent=2))
+        config = {
+            "$schema": "https://opencode.ai/config.json",
+            "instructions": ["AGENTS.md"],
+        }
+        return GeneratedFile(
+            path=Path("opencode.json"),
+            content=json.dumps(config, indent=2),
+            merger=JsonMerger(),
+        )
 
     def _skills(self, packs: list[Pack]) -> list[GeneratedFile]:
         return [
